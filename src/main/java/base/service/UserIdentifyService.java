@@ -1,5 +1,6 @@
 package base.service;
 
+import base.model.UserInfo;
 import base.model.UserStatus;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,4 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserIdentifyService {
 
   UserStatus retrieveUserStatus(HttpServletRequest request);
+
+  UserInfo registerUser(UserInfo userInfo);
 }

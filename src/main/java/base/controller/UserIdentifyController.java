@@ -1,5 +1,6 @@
 package base.controller;
 
+import base.model.UserInfo;
 import base.model.UserStatus;
 import base.controller.pack.DataRequest;
 import base.controller.pack.ResponsePacker;
@@ -11,14 +12,11 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author long
- * @since 18-3-4
- */
 @RestController
 public class UserIdentifyController {
 
@@ -37,6 +35,19 @@ public class UserIdentifyController {
       public List<?> execute(Map<String, Object> params) {
         List result = new ArrayList<UserStatus>(1);
         result.add(userIdentifyService.retrieveUserStatus(request));
+        return result;
+      }
+    };
+    return responsePacker.pack(null, dataRequest);
+  }
+
+  @RequestMapping(value = "/register", method = RequestMethod.POST)
+  public ResponseWrapper registerUser(@RequestBody UserInfo userInfo){
+    DataRequest dataRequest = new DataRequest() {
+      @Override
+      public List<?> execute(Map<String, Object> params) {
+        List result = new ArrayList<UserStatus>(1);
+        result.add(userIdentifyService.registerUser(userInfo));
         return result;
       }
     };
