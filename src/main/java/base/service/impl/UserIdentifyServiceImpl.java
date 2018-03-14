@@ -1,5 +1,7 @@
 package base.service.impl;
 
+import base.dao.impl.UserDaoImpl;
+import base.model.UserInfo;
 import base.model.UserStatus;
 import base.model.UserRole;
 
@@ -7,12 +9,10 @@ import base.service.UserIdentifyService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
-/**
- * @author long
- * @since 18-3-4
- */
 @Service
 public class UserIdentifyServiceImpl implements UserIdentifyService{
+
+    UserDaoImpl userDaoImpl;
 
   public UserStatus retrieveUserStatus(HttpServletRequest request) {
     UserStatus userStatus = new UserStatus();
@@ -30,5 +30,10 @@ public class UserIdentifyServiceImpl implements UserIdentifyService{
       userStatus.setRole(UserRole.USER);
     }
     return userStatus;
+  }
+
+  public UserInfo registerUser(UserInfo userInfo){
+    userDaoImpl.insert(userInfo);
+    return userInfo;
   }
 }
