@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserIdentifyController {
 
-  UserIdentifyService userIdentifyService;
-  ResponsePacker responsePacker = new ResponsePacker();
+  private UserIdentifyService userIdentifyService;
+  private ResponsePacker responsePacker = new ResponsePacker();
 
   @Autowired
   public void setUserIdentifyService(UserIdentifyService identifyService) {

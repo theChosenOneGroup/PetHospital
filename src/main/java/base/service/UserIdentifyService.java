@@ -10,4 +10,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserIdentifyService {
 
   UserStatus retrieveUserStatus(HttpServletRequest request);
+
 }
