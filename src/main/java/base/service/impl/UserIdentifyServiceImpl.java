@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @since 18-3-4
  */
 @Service
-public class UserIdentifyServiceImpl implements UserIdentifyService{
+public class UserIdentifyServiceImpl implements UserIdentifyService {
 
   public UserStatus retrieveUserStatus(HttpServletRequest request) {
     UserStatus userStatus = new UserStatus();

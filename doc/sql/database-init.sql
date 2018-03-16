@@ -48,11 +48,8 @@ CREATE TABLE `tb_labwork` (
 
 CREATE TABLE `tb_medicine` (
   `medicine_id` int(10) auto_increment NOT NULL,
-  `medicine_name` varchar(20) DEFAULT NULL,
-  `question_id` int(10) NOT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `duration` date DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `cost` decimal(38,5) NOT NULL,
   PRIMARY KEY (`medicine_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -71,6 +68,7 @@ CREATE TABLE `tb_office` (
   `office_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`office_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `tb_case` (
   `case_id` int(10) auto_increment NOT NULL,
