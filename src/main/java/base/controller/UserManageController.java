@@ -31,7 +31,7 @@ public class UserManageController {
     DataRequest dataRequest = new DataRequest() {
       @Override
       public List<?> execute(Map<String, Object> params) {
-        List result = new ArrayList<UserStatus>(1);
+        List result = new ArrayList<Integer>(1);
         result.add(userManageService.registerUser(userInfo));
         return result;
       }

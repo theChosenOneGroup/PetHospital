@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pethospital.base.dao.MedicineDao">
+  <insert id="insertMedicine" parameterType="base.model.MedicineInfo" useGeneratedKeys="true"
+    keyProperty="medicine_id">
+    insert into tb_medicine(name,cost)
+    values(#{medicineName,jdbcType=VARCHAR},
+            #{medicineCost,jdbcType=DECIMAL})
+  </insert>
+
+  <delete id="deleteMedicine" parameterType="base.model.MedicineInfo">
+    delete from tb_medicine where name = #{medicineName,jdbcType=VARCHAR}
+  </delete>
+
+  <update id="updateMedicine" parameterType="base.model.MedicineInfo">
+    update tb_medicine set cost = #{medicineCost,jdbcType=DECIMAL}
+    where name = #{medicineName,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectMedicine" parameterType="String" resultType="base.model.MedicineInfo">
+    select medicine_id as medicineId,name as medicineName,cost as medicineCost
+     from tb_medicine where name like #{medicineName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllMedicine" resultType="base.model.MedicineInfo">
+    select medicine_id as medicineId,name as medicineName,cost as medicineCost from tb_medicine
+  </select>
+
+</mapper>

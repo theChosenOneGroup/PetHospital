@@ -3,10 +3,10 @@ package base.model;
 public class UserInfo {
 
   private int userId;
-  String userName;
-  String password;
-  String authority;
-  String labelType;
+  private String userName;
+  private String password;
+  private String authority;
+  private String labelType;
 
   public int getUserId() {
     return userId;

@@ -12,9 +12,9 @@ public class UserManageServiceImpl implements UserManageService {
   @Autowired
   private UserDao userDao;
 
-  public UserInfo registerUser(UserInfo userInfo) {
-    userDao.insert(userInfo);
-    return userInfo;
+  public int registerUser(UserInfo userInfo) {
+    int result = userDao.insert(userInfo);
+    return result;
   }
   public UserInfo fixpassword(UserInfo userInfo){
     userDao.update(userInfo);
