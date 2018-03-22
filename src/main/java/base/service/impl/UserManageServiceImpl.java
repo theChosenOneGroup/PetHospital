@@ -20,4 +20,13 @@ public class UserManageServiceImpl implements UserManageService {
     userDao.update(userInfo);
     return userInfo;
   }
+
+  public boolean userLogin(UserInfo userInfo){
+    String password = userDao.select(userInfo);
+    if(password.equals(userInfo.getPassword()))
+      return true;
+    else
+      return false;
+  }
+
 }

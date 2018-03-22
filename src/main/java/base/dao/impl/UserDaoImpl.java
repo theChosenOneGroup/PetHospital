@@ -27,6 +27,17 @@ public class UserDaoImpl implements UserDao {
       return num;
     }
   }
+
+  public String select(UserInfo userInfo){
+    String stat=namespace+".selectUser";
+    try (SqlSession session = sqlSessionFactory.openSession()){
+      String password =session.selectOne(stat,userInfo);
+      session.commit();
+      return password;
+    }
+  }
+
+
   public int update(UserInfo userInfo){
     String stat = namespace + ".updatePassword";
     try (SqlSession session = sqlSessionFactory.openSession()){

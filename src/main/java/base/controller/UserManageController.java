@@ -50,4 +50,17 @@ public class UserManageController {
     };
     return responsePacker.pack(null, dataRequest);
   }
+
+  @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+  public ResponseWrapper userLogin(@RequestBody UserInfo userInfo){
+    DataRequest dataRequest = new DataRequest() {
+      @Override
+      public List<?> execute(Map<String, Object> params) {
+        List result = new ArrayList<Boolean>(1);
+        result.add(userManageService.userLogin(userInfo));
+        return result;
+      }
+    };
+    return responsePacker.pack(null, dataRequest);
+  }
 }
