@@ -11,4 +11,9 @@
             0,
             #{labelType,jdbcType=VARCHAR});
   </insert>
+  <update id="updatePassword" parameterType="base.model.UserInfo">
+      UPDATE tb_user
+      SET tb_user.password = #{password}
+      WHERE tb_user.user_name = #{userName};
+  </update>
 </mapper>

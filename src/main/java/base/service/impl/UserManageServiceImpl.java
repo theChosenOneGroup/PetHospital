@@ -16,5 +16,8 @@ public class UserManageServiceImpl implements UserManageService {
     userDao.insert(userInfo);
     return userInfo;
   }
-
+  public UserInfo fixpassword(UserInfo userInfo){
+    userDao.update(userInfo);
+    return userInfo;
+  }
 }

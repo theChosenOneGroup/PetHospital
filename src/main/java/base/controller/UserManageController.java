@@ -38,4 +38,16 @@ public class UserManageController {
     };
     return responsePacker.pack(null, dataRequest);
   }
+  @RequestMapping(value = "/fixpassword", method = RequestMethod.POST)
+  public ResponseWrapper update(@RequestBody UserInfo userInfo) {
+    DataRequest dataRequest = new DataRequest() {
+      @Override
+      public List<?> execute(Map<String, Object> params) {
+        List result = new ArrayList<UserInfo>(1);
+        result.add(userManageService.fixpassword(userInfo));
+        return result;
+      }
+    };
+    return responsePacker.pack(null, dataRequest);
+  }
 }
