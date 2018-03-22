@@ -24,5 +24,6 @@
   <mappers>
     <mapper resource="mybatis/TestMapper.xml"/>
     <mapper resource="mybatis/UserMapper.xml"/>
+    <mapper resource="mybatis/MedicineMapper.xml"/>
   </mappers>
 </configuration>
