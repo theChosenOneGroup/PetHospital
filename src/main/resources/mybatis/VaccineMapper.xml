@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pethospital.base.dao.VaccineDao">
+    <select id="selectVaccine" parameterType="String" resultType="base.model.VaccineInfo">
+        select vaccine_id as vaccineId,vaccine_name as vaccineName,cost as cost from tb_vaccine where vaccine_name like #{vaccineName}
+    </select>
+
+    <insert id="insertVaccine" parameterType="base.model.VaccineInfo" useGeneratedKeys="true"
+            keyProperty="vaccine_id">
+        insert into tb_vaccine(vaccine_name, cost)
+        values(#{vaccineName,jdbcType=VARCHAR},
+        #{cost,jdbcType=DECIMAL}
+        );
+    </insert>
+
+    <delete id="delete" parameterType="base.model.VaccineInfo" >
+        delete from tb_vaccine where vaccine_name=#{vaccineName}
+    </delete>
+
+    <update id="update" parameterType="base.model.VaccineInfo">
+        update tb_vaccine set cost=#{cost} where vaccine_name=#{vaccineName}
+    </update>
+
+    <select id="selectAll"  resultType="base.model.VaccineInfo">
+        select vaccine_id as vaccineId,vaccine_name as vaccineName,cost as cost from tb_vaccine
+    </select>
+</mapper>

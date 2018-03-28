@@ -11,6 +11,9 @@
             0,
             #{labelType,jdbcType=VARCHAR});
   </insert>
+    <select id="selectUser" parameterType="base.model.UserInfo" resultType="String">
+        select password FROM tb_user where user_name=#{userName};
+    </select>
   <update id="updatePassword" parameterType="base.model.UserInfo">
       UPDATE tb_user
       SET tb_user.password = #{password}

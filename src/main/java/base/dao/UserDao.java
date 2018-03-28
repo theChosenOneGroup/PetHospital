@@ -9,4 +9,8 @@ public interface UserDao {
   public int update(UserInfo userInfo);
 
   public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory);
+
+  public String select(UserInfo userInfo);
+
+
 }
