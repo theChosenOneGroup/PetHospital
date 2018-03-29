@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pethospital.base.dao.AdminDao">
+  <insert id="insert" parameterType="base.model.UserInfo" useGeneratedKeys="true"
+    keyProperty="user_id">
+    insert into tb_user(user_name, password,authority,label_type)
+    values(#{userName,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            0,
+            #{labelType,jdbcType=VARCHAR});
+  </insert>
+    <select id="select" parameterType="String" resultType="base.model.UserInfo">
+        select user_id as userId,user_name as userName,password as password,authority as authority,label_type as labelType  FROM tb_user where user_name=#{userName};
+    </select>
+  <update id="update" parameterType="base.model.UserInfo">
+      UPDATE tb_user
+      SET tb_user.password = #{password},tb_user.authority=#{authority},tb_user.label_type=#{labelType}
+      WHERE tb_user.user_name = #{userName};
+  </update>
+    <delete id="delete" parameterType="base.model.UserInfo">
+        delete from tb_user where user_name=#{userName}
+    </delete>
+    <select id="selectAll"  resultType="base.model.UserInfo">
+        select user_id as userId,user_name as userName,password as password,authority as authority,label_type as labelType  FROM tb_user ;
+    </select>
+</mapper>
