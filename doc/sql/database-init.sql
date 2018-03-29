@@ -64,7 +64,7 @@ CREATE TABLE `tb_picnvideo` (
 
 CREATE TABLE `tb_office` (
   `office_id` int(10) auto_increment NOT NULL,
-  `persion_name` varchar(20) DEFAULT NULL,
+  `person_name` varchar(20) DEFAULT NULL,
   `office_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`office_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -72,12 +72,12 @@ CREATE TABLE `tb_office` (
 
 CREATE TABLE `tb_case` (
   `case_id` int(10) auto_increment NOT NULL,
-  `casea_name` varchar(20) DEFAULT NULL,
+  `case_name` varchar(20) DEFAULT NULL,
   `case_type` varchar(20) DEFAULT NULL,
-  `jc_name` varchar(20) DEFAULT NULL,
-  `jc_pic` varchar(20) DEFAULT NULL,
   `check_name` varchar(20) DEFAULT NULL,
-  `check_pic` varchar(20) DEFAULT NULL,
+  `check_pic_id` int(10),
+  `diagnose_name` varchar(20) DEFAULT NULL,
+  `diagnose_pic_id` int(10),
   `result` varchar(20) DEFAULT NULL,
   `treat_text` text,
   `treat_video` varchar(20) DEFAULT NULL,

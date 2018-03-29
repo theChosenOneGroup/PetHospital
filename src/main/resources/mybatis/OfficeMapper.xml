@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pethospital.base.dao.OfficeDao">
+    <select id="select" parameterType="String" resultType="base.model.OfficeInfo">
+        select office_id as officeId,person_name as personName,office_name as officeName from tb_office where office_name like #{officeName}
+    </select>
+
+    <insert id="insert" parameterType="base.model.OfficeInfo" useGeneratedKeys="true"
+            keyProperty="office_id">
+        insert into tb_office(person_name, office_name)
+        values(#{personName,jdbcType=VARCHAR},
+        #{officeName,jdbcType=VARCHAR}
+        );
+    </insert>
+
+    <delete id="delete" parameterType="base.model.OfficeInfo" >
+        delete from tb_office where office_name=#{officeName}
+    </delete>
+
+    <update id="update" parameterType="base.model.OfficeInfo">
+        update tb_office set person_name=#{personName} where office_name=#{officeName}
+    </update>
+
+    <select id="selectAll"  resultType="base.model.OfficeInfo">
+        select office_id as officeId,person_name as personName,office_name as officeName from tb_office
+    </select>
+</mapper>

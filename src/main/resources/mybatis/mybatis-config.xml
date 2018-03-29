@@ -26,7 +26,12 @@
     <mapper resource="mybatis/UserMapper.xml"/>
     <mapper resource="mybatis/MedicineMapper.xml"/>
     <mapper resource="mybatis/VaccineMapper.xml"/>
+<<<<<<< HEAD
     <mapper resource="mybatis/LabworkMapper.xml"/>
     <mapper resource="mybatis/QuestionMapper.xml"/>
+=======
+    <mapper resource="mybatis/OfficeMapper.xml"/>
+    <mapper resource="mybatis/AdminMapper.xml"/>
+>>>>>>> temp1
   </mappers>
 </configuration>
