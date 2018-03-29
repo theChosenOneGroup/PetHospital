@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pethospital.base.dao.LabworkDao">
+    <select id="selectLabwork" parameterType="String" resultType="base.model.LabworkInfo">
+        select labwork_id as labworkId,labwork_name as labworkName,cost as cost from tb_labwork where labwork_name like #{labworkName}
+    </select>
+
+    <insert id="insertLabwork" parameterType="base.model.LabworkInfo" useGeneratedKeys="true"
+            keyProperty="labwork_id">
+        insert into tb_labwork(labwork_name, cost)
+        values(#{labworkName,jdbcType=VARCHAR},
+        #{cost,jdbcType=DECIMAL}
+        );
+    </insert>
+
+    <delete id="delete" parameterType="base.model.LabworkInfo" >
+        delete from tb_labwork where labwork_name=#{labworkName}
+    </delete>
+
+    <update id="update" parameterType="base.model.LabworkInfo">
+        update tb_labwork set cost=#{cost} where labwork_name=#{labworkName}
+    </update>
+
+    <select id="selectAll"  resultType="base.model.LabworkInfo">
+        select labwork_id as labworkId,labwork_name as labworkName,cost as cost from tb_labwork
+    </select>
+</mapper>

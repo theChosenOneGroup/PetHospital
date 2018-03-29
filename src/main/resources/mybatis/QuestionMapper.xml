@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pethospital.base.dao.QuestionDao">
+    <select id="selectQuestion" parameterType="String" resultType="base.model.QuestionInfo">
+        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions where text like #{text}
+    </select>
+
+    <insert id="insertQuestion" parameterType="base.model.QuestionInfo" useGeneratedKeys="true"
+            keyProperty="question_id">
+        insert into tb_questions(type_name, text, answer)
+        values(#{typeName,jdbcType=VARCHAR},
+        #{text,jdbcType=VARCHAR},
+        #{answer,jdbcType=VARCHAR}
+        );
+    </insert>
+
+    <delete id="delete" parameterType="base.model.QuestionInfo" >
+        delete from tb_questions where question_name=#{questionName}
+    </delete>
+
+    <update id="update" parameterType="base.model.QuestionInfo">
+        update tb_questions set cost=#{cost} where question_name=#{questionName}
+    </update>
+
+    <select id="selectAll"  resultType="base.model.QuestionInfo">
+        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions
+    </select>
+    <select id="selectFromAll"  resultType="base.model.QuestionInfo">
+        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions order by rand() limit 20
+    </select>
+
+    <select id="selectByType"  parameterType="String" resultType="base.model.QuestionInfo">
+        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions where type_name=#{typeName} order by rand() limit 20
+    </select>
+</mapper>
