@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+  <meta charset="utf-8"/>
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" src="../static/css/layout.css"
+        th:src="@{/css/layout.css}"/>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="../static/js/jquery.2.1.1.min.js" th:src="@{/js/jquery.2.1.1.min.js}"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Pet Hospital</title>
 </head>
 <body>
-<h1>Home Page is Here</h1>
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+<div th:replace="header::header"/>
+<div th:replace="sidebar::demo"/>
+
+<div class="container col-sm-8">
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Center Area</div>
+      <div style="width:100%;height:800px"></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

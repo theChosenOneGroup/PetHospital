@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>User Management</title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="../static/js/jquery.2.1.1.min.js" th:src="@{/js/jquery.2.1.1.min.js}"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Pet Hospital</title>
+</head>
+<body>
+<div th:replace="header::header"/>
+<div th:replace="sidebar::blank"/>
+
+<div class="container pull-left col-sm-8">
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Center Area</div>
+      <div style="width:100%;height:800px">
+        <div>
+          <div>
+            <table class="table table-striped table-bordered table-hover"
+                   style="margin-bottom:2px;">
+              <thead>
+              <tr>
+                <th>User</th>
+                <th>name</th>
+                <th>Mail</th>
+                <th>Role</th>
+                <th>Address</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>10001</td>
+                <td>John</td>
+                <td>test1@google.com</td>
+                <td>Admin</td>
+                <td>Springfield</td>
+                <td>
+                  <a><span class="glyphicon glyphicon-pencil"
+                           style="font-size:1.2em;width:30%;margin-left:15%;margin-right:3%;"></span></a>
+                  <a><span class="glyphicon glyphicon-remove"
+                           style="font-size:1.2em;width:30%;margin-left:3%;margin-right:10%"></span></a>
+                </td>
+              </tr>
+              <tr>
+                <td>10002</td>
+                <td>Smith</td>
+                <td>test2@google.com</td>
+                <td>Admin</td>
+                <td>Franklin</td>
+                <td>
+                  <a><span class="glyphicon glyphicon-pencil"
+                           style="font-size:1.2em;width:30%;margin-left:15%;margin-right:3%;"></span></a>
+                  <a><span class="glyphicon glyphicon-remove"
+                           style="font-size:1.2em;width:30%;margin-left:3%;margin-right:10%"></span></a>
+                </td>
+              </tr>
+              <tr>
+                <td>10003</td>
+                <td>Fancy</td>
+                <td>test3@google.com</td>
+                <td>User</td>
+                <td>Salem</td>
+                <td>
+                  <a><span class="glyphicon glyphicon-pencil"
+                           style="font-size:1.2em;width:30%;margin-left:15%;margin-right:3%;"></span></a>
+                  <a><span class="glyphicon glyphicon-remove"
+                           style="font-size:1.2em;width:30%;margin-left:3%;margin-right:10%"></span></a>
+                </td>
+              </tr>
+              <tr>
+                <td>10004</td>
+                <td>Lucy</td>
+                <td>test4@google.com</td>
+                <td>User</td>
+                <td>Los Angles</td>
+                <td>
+                  <a><span class="glyphicon glyphicon-pencil"
+                           style="font-size:1.2em;width:30%;margin-left:15%;margin-right:3%;"></span></a>
+                  <a><span class="glyphicon glyphicon-remove"
+                           style="font-size:1.2em;width:30%;margin-left:3%;margin-right:10%"></span></a>
+                </td>
+              </tr>
+              <tr>
+                <td>10005</td>
+                <td>Trump</td>
+                <td>test5@google.com</td>
+                <td>Admin,User</td>
+                <td>Clinton</td>
+                <td>
+                  <a><span class="glyphicon glyphicon-pencil"
+                           style="font-size:1.2em;width:30%;margin-left:15%;margin-right:3%;"></span></a>
+                  <a><span class="glyphicon glyphicon-remove"
+                           style="font-size:1.2em;width:30%;margin-left:3%;margin-right:10%"></span></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--<div class="form-group">-->
+          <!--<lable class="control-label">Show-->
+          <!--</lable>-->
+          <!--&lt;!&ndash;<lable for="pageSize" class="form-label">Page Size</lable>&ndash;&gt;-->
+          <!--<div class="col-sm-2">-->
+          <!--<select id="pageSize" class="selectpicker input-sm">-->
+          <!--<option>test</option>-->
+          <!--<option>test2</option>-->
+          <!--</select>-->
+          <!--</div>-->
+          <!--</div>-->
+          <div>
+            <ul class="pagination pull-right">
+              <li><a href="#">&laquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

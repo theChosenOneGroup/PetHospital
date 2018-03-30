@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Home</title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="../static/js/jquery.2.1.1.min.js" th:src="@{/js/jquery.2.1.1.min.js}"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Pet Hospital</title>
+</head>
+<body>
+<div th:fragment="demo" class="container pull-left col-sm-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">Group One</div>
+    <ul class="list-group">
+      <li class="list-group-item">item 1</li>
+      <li class="list-group-item">item 2</li>
+    </ul>
+    <div class="panel-heading">Group Two</div>
+    <ul class="list-group">
+      <li class="list-group-item">item 1</li>
+      <li class="list-group-item">item 2</li>
+    </ul>
+  </div>
+</div>
+
+<div th:fragment="blank" class="pull-left col-sm-2">
+  <div style="height:400px;background-color: whitesmoke;">Place Holder</div>
+</div>
+</body>
+</html>

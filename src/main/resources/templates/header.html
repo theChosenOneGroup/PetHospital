@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Home</title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="../static/js/jquery.2.1.1.min.js" th:src="@{/js/jquery.2.1.1.min.js}"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Pet Hospital</title>
+</head>
+<body>
+<div th:fragment="header">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">PetHospital</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">导览</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              职能学习<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">角色扮演</a></li>
+              <li><a href="#">职能学习</a></li>
+            </ul>
+          </li>
+          <li><a href="#">测试</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-align-justify"/>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Something</a></li>
+              <li><a href="#">Other things</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+</body>
+</html>
