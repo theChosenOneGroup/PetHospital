@@ -1,0 +1,21 @@
+---
+- config:
+  - testset: 'Operations of managing users'
+  - variable_binds: {
+      PATH: '/user',
+      SUCCESS: 100001,
+      ERROR: 100002
+    }
+
+- test:
+  - group: '[User Management]'
+  - name: '[Test 1]Retrieve User'
+  - url: {template: '$PATH?page=0&pageSize=20'}
+  - method: 'GET'
+  - validators:
+    - compare: {jsonpath_mini: 'code', comparator: 'str_eq', expected: {template: $SUCCESS}}
+
+- test:
+  - group: '[User Management]'
+  - name: '[Test 2]Update User'
+  -
