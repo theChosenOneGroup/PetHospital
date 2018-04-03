@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.UserDao">
+  <update id="update" parameterType="base.model.User">
+    UPDATE user
+    <set>
+      <if test="name != null">name=#{name},</if>
+      <if test="mail != null">mail=#{mail},</if>
+      <if test="role != null">role=#{role},</if>
+      <if test="address != null">address=#{address},</if>
+      <if test="valid != null">valid=#{valid},</if>
+      <if test="password != null">password=#{password}</if>
+    </set>
+    WHERE id=#{id};
+  </update>
+
+  <insert id="create" parameterType="base.model.User">
+    INSERT INTO user (name, mail, role, address, password)
+      VALUE (#{name}, #{mail}, #{role}, #{address}, #{password});
+  </insert>
+
+  <delete id="delete" parameterType="long">
+    DELETE FROM user
+    WHERE id = #{id};
+  </delete>
+
+  <update id="invalid" parameterType="long">
+    UPDATE user
+    SET valid = fasle
+    WHERE id = #{id};
+  </update>
+
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.User">
+    SELECT *
+    FROM user
+    LIMIT #{start}, #{end};
+  </select>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM user;
+  </select>
+</mapper>
