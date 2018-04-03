@@ -1,20 +1,54 @@
-function requestAndDo(method, url, doFunc) {
+var JSONType = "application/json";
+
+function requestAndDo(method, url, paras, dataType, doFunc, async) {
   var httpClient = getHttpClient();
   httpClient.onreadystatechange = function () {
     if (httpClient.readyState == 4 && httpClient.status == 200) {
       doFunc(JSON.parse(httpClient.responseText));
     }
+  };
+  httpClient.open(method, url, async);
+  if (method.toUpperCase() == 'POST' || method.toUpperCase() == 'PUT') {
+    if (dataType != null) {
+      httpClient.setRequestHeader('Content-Type', dataType);
+    }
+    httpClient.send(paras);
+  } else {
+    httpClient.send();
   }
-  httpClient.open(method, url, true);
-  httpClient.send();
 }
 
-function get(url, doFunc) {
-  requestAndDo("GET", url, doFunc);
+function get(url, paras, doFunc) {
+  if (paras != null) {
+    url = url + "?" + paras;
+  }
+  requestAndDo("GET", url, null, null, doFunc,true);
 }
 
-function post(url, doFunc) {
-  requestAndDo("POST", url, doFunc);
+function synchGet(url, paras, doFunc) {
+  if (paras != null) {
+    url = url + "?" + paras;
+  }
+  requestAndDo("GET", url, null, null, doFunc, false);
+}
+
+function post(url, paras, dataType, doFunc) {
+  requestAndDo("POST", url, paras, dataType, doFunc,true);
+}
+
+function postJson(url, paras, doFunc) {
+  requestAndDo("POST", url, paras, JSONType, doFunc,true);
+}
+
+function httpDelete(url, paras, doFunc) {
+  if (paras != null) {
+    url = url + "?" + paras;
+  }
+  requestAndDo("DELETE", url, null, null, doFunc,true);
+}
+
+function put(url, paras, dataType, doFunc) {
+  requestAndDo("PUT", url, paras, dataType, doFunc,true);
 }
 
 function getHttpClient() {

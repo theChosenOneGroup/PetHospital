@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Modal</title>
+</head>
+<body>
+<div th:fragment="user-modification" id="user-modification" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="user-modification" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">User Information</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group col-sm-3">
+          <span class="input-group-addon" style="width:10%">ID</span>
+          <input type="text" class="form-control" disabled="disabled"/>
+        </div>
+        <div class="input-group col-sm-3">
+          <span class="input-group-addon" style="width:10%">Name</span>
+          <input type="text" class="form-control"/>
+        </div>
+        <div class="input-group col-sm-3">
+          <span class="input-group-addon" style="width:10%">Mail</span>
+          <input type="text" class="form-control"/>
+        </div>
+        <div class="input-group col-sm-3">
+          <span class="input-group-addon" style="width:10%">Role</span>
+          <input type="text" class="form-control"/>
+        </div>
+        <div class="input-group col-sm-3">
+          <span class="input-group-addon" style="width:10%">Address</span>
+          <input type="text" class="form-control"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
