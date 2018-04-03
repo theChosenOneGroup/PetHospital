@@ -6,11 +6,15 @@ import base.model.response.ResultWrapper;
 import base.model.response.StatusCode;
 import java.util.List;
 import java.util.Map;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 /**
  * @author long
  * @since 18-3-4
  */
+@Component
+@Primary
 public class ResponsePacker {
 
   public ResponseWrapper pack(Map<String,Object> paras,DataRequest task){
