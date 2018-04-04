@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.RecordDao">
+  <update id="update" parameterType="base.model.Record">
+    UPDATE record
+    <set>
+      <if test="description != null">description=#{description},</if>
+      <if test="contentType != null">content_type=#{contentType}</if>
+    </set>
+    where created_time = #{createdTime} and rand = #{rand} and sequence = #{sequence};
+  </update>
+
+  <select id="retrieve" parameterType="Page" resultType="base.model.Record">
+    SELECT
+      created_time AS createdTime,
+      rand,
+      sequence,
+      description
+    FROM record
+    LIMIT #{start}, #{end};
+  </select>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM record;
+  </select>
+
+  <delete id="delete" parameterType="base.model.Record">
+    DELETE FROM record
+    WHERE created_time = #{createdTime} AND rand = #{rand} AND sequence = #{sequence};
+  </delete>
+
+  <insert id="create" parameterType="base.model.Record">
+    INSERT INTO record VALUE (#{createdTime}, #{rand}, #{sequence}, #{contentType}, #{description});
+  </insert>
+</mapper>

@@ -21,13 +21,13 @@ public class JsonUtil {
     }
   }
 
-  public static Map<String, Object> toMap(Object obj) {
+  public static Map<Object, Object> toMap(Object obj) {
     return objectMapper.convertValue(obj, Map.class);
   }
 
-  public static Map<String, Object> toMap(String key, String value, String... pairs) {
+  public static Map<Object, Object> toMap(Object key, Object value, Object... pairs) {
     assert pairs.length % 2 == 0;
-    Map<String, Object> map = new HashMap<>(pairs.length / 2 + 1);
+    Map<Object, Object> map = new HashMap<>(pairs.length / 2 + 1);
     map.put(key, value);
     for (int i = 1; i < pairs.length; i += 2) {
       map.put(pairs[i - 1], pairs[i]);

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.ArticleDao">
+  <update id="update" parameterType="base.model.Article">
+    UPDATE article
+    <set>
+      <if test="description != null">description = #{description}</if>
+    </set>
+    WHERE created_time = #{createdTime} AND rand = #{rand};
+  </update>
+
+  <delete id="delete" parameterType="base.model.Article">
+    DELETE FROM article
+    WHERE created_time = #{createdTime} AND rand = #{rand};
+  </delete>
+
+  <insert id="create" parameterType="base.model.Article">
+    INSERT INTO article (created_time, rand, description)
+      VALUE (#{createdTime}, #{rand}, #{description});
+  </insert>
+
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Article">
+    SELECT
+      created_time AS createdTime,
+      rand,
+      description
+    FROM article
+    LIMIT #{start}, #{end};
+  </select>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM article;
+  </select>
+</mapper>
