@@ -11,7 +11,7 @@ public class ResultWrapper extends BaseWrapper {
 
   private List<?> result;
 
-  public ResultWrapper(int code, Map<String, Object> paras, List<?> result) {
+  public ResultWrapper(int code, Map<Object, Object> paras, List<?> result) {
     super(code, paras);
     this.result = result;
   }

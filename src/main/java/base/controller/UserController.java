@@ -10,7 +10,6 @@ import base.model.response.ResponseWrapper;
 import base.util.JsonUtil;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +55,11 @@ public class UserController {
     Page range = new Page(page, pageSize);
     DataRequest dataRequest = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         return userDao.retrieve(range);
       }
     };
-    return packer.pack(JsonUtil.toMap("page", page.toString(), "pageSize", pageSize.toString()),
+    return packer.pack(JsonUtil.toMap("page", page, "pageSize", pageSize),
         dataRequest);
   }
 
@@ -68,7 +67,7 @@ public class UserController {
   public ResponseWrapper updateUser(@RequestBody User user) {
     DataRequest request = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         if (userDao.update(user) == 0) {
           throw new RuntimeException("Update is failed");
         }
@@ -82,21 +81,21 @@ public class UserController {
   public ResponseWrapper deleteUser(@RequestParam Long id) {
     DataRequest request = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         if (userDao.delete(id) == 0) {
-          throw new RuntimeException("Delete user is failed");
+          throw new RuntimeException("Deletion is failed");
         }
         return null;
       }
     };
-    return messagePacker.pack(JsonUtil.toMap("id", id.toString()), request);
+    return messagePacker.pack(JsonUtil.toMap("id", id), request);
   }
 
   @RequestMapping(value = "/user", method = RequestMethod.POST)
   public ResponseWrapper createUser(@RequestBody User user) {
     DataRequest request = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         if (userDao.create(user) == 0) {
           throw new RuntimeException("Create user is failed");
         }
@@ -111,7 +110,7 @@ public class UserController {
   public ResponseWrapper count() {
     DataRequest dataRequest = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         List<Long> list = new ArrayList<>(1);
         list.add(userDao.count());
         return list;
@@ -119,5 +118,4 @@ public class UserController {
     };
     return packer.pack(null, dataRequest);
   }
-
 }

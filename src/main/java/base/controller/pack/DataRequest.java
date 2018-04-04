@@ -8,5 +8,6 @@ import java.util.Map;
  * @since 18-3-4
  */
 public interface DataRequest {
-  List<?> execute(Map<String,Object> params);
+
+  List<?> execute();
 }

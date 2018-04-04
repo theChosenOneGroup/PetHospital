@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 public class MessagePacker extends ResponsePacker {
 
   @Override
-  public ResponseWrapper pack(Map<String, Object> paras, DataRequest task) {
+  public ResponseWrapper pack(Map<Object, Object> paras, DataRequest task) {
     try {
-      task.execute(paras);
+      task.execute();
     } catch (Exception e) {
       return new MessageWrapper(StatusCode.ERROR, paras, e.getMessage());
     }

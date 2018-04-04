@@ -9,9 +9,9 @@ import java.util.Map;
 public class BaseWrapper implements ResponseWrapper {
 
   private int code;
-  private Map<String, Object> requestParams;
+  private Map<Object, Object> requestParams;
 
-  public BaseWrapper(int code, Map<String, Object> requestParams) {
+  public BaseWrapper(int code, Map<Object, Object> requestParams) {
     this.code = code;
     this.requestParams = requestParams;
   }
@@ -24,15 +24,15 @@ public class BaseWrapper implements ResponseWrapper {
     return code;
   }
 
-  public void setRequestParams(Map<String, Object> requestParams) {
+  public void setRequestParams(Map<Object, Object> requestParams) {
 
   }
 
-  public Map<String, Object> getRequestParams() {
+  public Map<Object, Object> getRequestParams() {
     return requestParams;
   }
 
-  public void addRequestParam(String key, String value) {
+  public void addRequestParam(Object key, String value) {
     this.requestParams.put(key, value);
   }
 }

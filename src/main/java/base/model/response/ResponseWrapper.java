@@ -9,5 +9,5 @@ import java.util.Map;
 public interface ResponseWrapper {
 
   public int getCode();
-  public Map<String,Object> getRequestParams();
+  public Map<Object,Object> getRequestParams();
 }

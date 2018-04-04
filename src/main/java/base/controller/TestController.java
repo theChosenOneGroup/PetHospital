@@ -30,7 +30,7 @@ public class TestController {
   public ResponseWrapper test(Integer id) {
     DataRequest request = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         List<Integer> result = new ArrayList<>(1);
         result.add(testService.test(id));
         return result;

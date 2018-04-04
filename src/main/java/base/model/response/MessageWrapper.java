@@ -10,7 +10,7 @@ public class MessageWrapper extends BaseWrapper {
 
   private String message;
 
-  public MessageWrapper(int code, Map<String, Object> paras, String message) {
+  public MessageWrapper(int code, Map<Object, Object> paras, String message) {
     super(code, paras);
     this.message = message;
   }

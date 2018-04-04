@@ -17,17 +17,17 @@ import org.springframework.stereotype.Component;
 @Primary
 public class ResponsePacker {
 
-  public ResponseWrapper pack(Map<String,Object> paras,DataRequest task){
+  public ResponseWrapper pack(Map<Object, Object> paras, DataRequest task) {
     List<?> result;
-    try{
-      result=task.execute(paras);
-    }catch(Exception e){
+    try {
+      result = task.execute();
+    } catch (Exception e) {
 
       //TODO handle exception
-      return new MessageWrapper(StatusCode.ERROR,paras,e.getMessage());
+      return new MessageWrapper(StatusCode.ERROR, paras, e.getMessage());
     }
     //TODO handle successful request
-    return new ResultWrapper(StatusCode.SUCCESS,paras,result);
+    return new ResultWrapper(StatusCode.SUCCESS, paras, result);
   }
 
 }

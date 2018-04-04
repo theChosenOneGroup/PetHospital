@@ -8,7 +8,6 @@ import base.service.UserIdentifyService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserIdentifyController {
 
-  UserIdentifyService userIdentifyService;
-  ResponsePacker responsePacker = new ResponsePacker();
+  private UserIdentifyService userIdentifyService;
+  private ResponsePacker responsePacker = new ResponsePacker();
 
   @Autowired
   public void setUserIdentifyService(UserIdentifyService identifyService) {
@@ -34,7 +33,7 @@ public class UserIdentifyController {
   public ResponseWrapper identifyUser(HttpServletRequest request) {
     DataRequest dataRequest = new DataRequest() {
       @Override
-      public List<?> execute(Map<String, Object> params) {
+      public List<?> execute() {
         List result = new ArrayList<UserStatus>(1);
         result.add(userIdentifyService.retrieveUserStatus(request));
         return result;
