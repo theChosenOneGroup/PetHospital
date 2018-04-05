@@ -1,14 +1,12 @@
 package base.controller;
 
-import base.controller.pack.ResponsePacker;
 import base.dao.ArticleDao;
 import base.model.Article;
 import base.model.Page;
 import base.model.response.ResponseWrapper;
+import base.service.ArticleService;
 import base.util.JsonUtil;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,9 +26,15 @@ public class ArticleController extends BaseController {
 
   private ArticleDao articleDao;
 
+  private ArticleService articleService;
+
   @Autowired
   public void setArticleDao(ArticleDao articleDao) {
     this.articleDao = articleDao;
+  }
+
+  public void setArticleService(ArticleService articleService) {
+    this.articleService = articleService;
   }
 
   @GetMapping(value = "/article")
@@ -53,9 +57,7 @@ public class ArticleController extends BaseController {
   public ResponseWrapper delete(@RequestParam Long timestamp,
       @RequestParam Integer rand) {
     return messagePacker.pack(JsonUtil.toMap("timestamp", timestamp, "rand", rand), () -> {
-      if (0 == articleDao.delete(new Article(timestamp, rand, null))) {
-        throw new RuntimeException("Deletion is failed");
-      }
+      articleService.delete(new Article(timestamp, rand, null));
       return null;
     });
   }

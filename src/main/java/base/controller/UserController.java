@@ -82,7 +82,9 @@ public class UserController {
     DataRequest request = new DataRequest() {
       @Override
       public List<?> execute() {
-        if (userDao.delete(id) == 0) {
+        User user=new User();
+        user.setId(id);
+        if (userDao.delete(user) == 0) {
           throw new RuntimeException("Deletion is failed");
         }
         return null;

@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface BaseDao<T> {
 
-  public int create(T obj);
+  int create(T obj);
 
-  public int delete(T obj);
+  int delete(T obj);
 
-  public List<T> retrieve(Page obj);
+  List<T> retrieve(Page obj);
 
-  public int update(T object);
+  int update(T object);
 
-  public long count();
+  long count();
 }

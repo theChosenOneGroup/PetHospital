@@ -1,6 +1,7 @@
 package base.dao.impl;
 
 import base.dao.RecordDao;
+import base.model.Article;
 import base.model.Page;
 import base.model.Record;
 import java.util.List;
@@ -33,5 +34,14 @@ public class RecordDaoImpl extends BaseDaoImp<Record> implements RecordDao {
 
   public long count() {
     return (long) execute((session) -> session.selectOne(namespace + ".count"));
+  }
+
+  public List<Record> retrieveArticle(Article article) {
+    return (List<Record>) execute(
+        (session) -> session.selectList(namespace + ".retrieveArticle", article));
+  }
+
+  public int deleteArticle(Article article) {
+    return (int) execute((session) -> session.delete(namespace + ".deleteArticle", article));
   }
 }

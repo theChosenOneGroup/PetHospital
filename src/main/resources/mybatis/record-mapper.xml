@@ -12,14 +12,26 @@
     where created_time = #{createdTime} and rand = #{rand} and sequence = #{sequence};
   </update>
 
-  <select id="retrieve" parameterType="Page" resultType="base.model.Record">
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Record">
     SELECT
       created_time AS createdTime,
       rand,
       sequence,
+      content_type AS contentType,
       description
     FROM record
     LIMIT #{start}, #{end};
+  </select>
+
+  <select id="retrieveArticle" parameterType="base.model.Article" resultType="base.model.Record">
+    SELECT
+      created_time AS createdTime,
+      rand,
+      sequence,
+      content_type AS contentType,
+      description
+    FROM record
+    WHERE created_time = #{createdTime} AND rand = #{rand};
   </select>
 
   <select id="count" resultType="Long">
@@ -30,6 +42,11 @@
   <delete id="delete" parameterType="base.model.Record">
     DELETE FROM record
     WHERE created_time = #{createdTime} AND rand = #{rand} AND sequence = #{sequence};
+  </delete>
+
+  <delete id="deleteArticle" parameterType="base.model.Article">
+    DELETE FROM record
+    WHERE created_time = #{createdTime} AND rand = #{rand};
   </delete>
 
   <insert id="create" parameterType="base.model.Record">
