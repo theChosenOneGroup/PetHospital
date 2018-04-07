@@ -2,9 +2,9 @@ package base.controller;
 
 import base.controller.pack.DataRequest;
 import base.controller.pack.ResponsePacker;
-import base.model.OfficeInfo;
+import base.model.CaseInfo;
 import base.model.response.ResponseWrapper;
-import base.service.OfficeManageService;
+import base.service.CaseManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,76 +16,90 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class OfficeManageController {
+public class CaseManageController {
 
-    private OfficeManageService officeManageService;
+    private CaseManageService caseManageService;
     private ResponsePacker responsePacker = new ResponsePacker();
 
     @Autowired
-    public void setOfficeManageService(OfficeManageService officeManageService) {
-        this.officeManageService = officeManageService;
+    public void setCaseManageService(CaseManageService caseManageService) {
+        this.caseManageService = caseManageService;
     }
 
-    @RequestMapping(value = "/office/search", method = RequestMethod.POST)
-    public ResponseWrapper search(@RequestBody OfficeInfo officeInfo){
+    @RequestMapping(value = "/case/search", method = RequestMethod.POST)
+    public ResponseWrapper search(@RequestBody CaseInfo caseInfo){
         DataRequest dataRequest = new DataRequest() {
             @Override
             public List<?> execute(Map<String, Object> params) {
-                List result = new ArrayList<OfficeInfo>();
-                result=officeManageService.search(officeInfo);
+                List result = new ArrayList<CaseInfo>();
+                result=caseManageService.search(caseInfo);
                 return result;
             }
         };
         return responsePacker.pack(null, dataRequest);
     }
 
-    @RequestMapping(value = "/office/add", method = RequestMethod.POST)
-    public ResponseWrapper add(@RequestBody OfficeInfo officeInfo) {
-        DataRequest dataRequest = new DataRequest() {
-            @Override
-            public List<?> execute(Map<String, Object> params) {
-                List result = new ArrayList<Integer>(1);
-                result.add(officeManageService.add(officeInfo));
-                return result;
-            }
-        };
-        return responsePacker.pack(null, dataRequest);
-    }
-
-    @RequestMapping(value = "/office/delete", method = RequestMethod.POST)
-    public ResponseWrapper delete(@RequestBody OfficeInfo officeInfo) {
+    @RequestMapping(value = "/case/add", method = RequestMethod.POST)
+    public ResponseWrapper add(@RequestBody CaseInfo caseInfo) {
         DataRequest dataRequest = new DataRequest() {
             @Override
             public List<?> execute(Map<String, Object> params) {
                 List result = new ArrayList<Integer>(1);
-                result.add(officeManageService.delete(officeInfo));
+                result.add(caseManageService.add(caseInfo));
                 return result;
             }
         };
         return responsePacker.pack(null, dataRequest);
     }
 
-    @RequestMapping(value = "/office/update", method = RequestMethod.POST)
-    public ResponseWrapper update(@RequestBody OfficeInfo officeInfo) {
+    @RequestMapping(value = "/case/delete", method = RequestMethod.POST)
+    public ResponseWrapper delete(@RequestBody CaseInfo caseInfo) {
         DataRequest dataRequest = new DataRequest() {
             @Override
             public List<?> execute(Map<String, Object> params) {
                 List result = new ArrayList<Integer>(1);
-                result.add(officeManageService.update(officeInfo));
+                result.add(caseManageService.delete(caseInfo));
                 return result;
             }
         };
         return responsePacker.pack(null, dataRequest);
     }
 
-    @RequestMapping(value = "/office/searchAll", method = RequestMethod.POST)
+    @RequestMapping(value = "/case/update", method = RequestMethod.POST)
+    public ResponseWrapper update(@RequestBody CaseInfo caseInfo) {
+        DataRequest dataRequest = new DataRequest() {
+            @Override
+            public List<?> execute(Map<String, Object> params) {
+                List result = new ArrayList<Integer>(1);
+                result.add(caseManageService.update(caseInfo));
+                return result;
+            }
+        };
+        return responsePacker.pack(null, dataRequest);
+    }
+
+    @RequestMapping(value = "/case/searchAll", method = RequestMethod.POST)
     public ResponseWrapper searchAll(){
         DataRequest dataRequest = new DataRequest() {
             @Override
             public List<?> execute(Map<String, Object> params) {
-                List result = new ArrayList<OfficeInfo>();
-                result=officeManageService.searchAll();
+                List result = new ArrayList<CaseInfo>();
+                result=caseManageService.searchAll();
                 return result;
+            }
+        };
+        return responsePacker.pack(null, dataRequest);
+    }
+
+    @RequestMapping(value = "/case/cost", method = RequestMethod.POST)
+    public ResponseWrapper getCost(@RequestBody CaseInfo caseInfo) {
+        DataRequest dataRequest = new DataRequest() {
+            @Override
+            public List<?> execute(Map<String, Object> params) {
+                List list = new ArrayList<String>();
+                String result = caseManageService.getCost(caseInfo);
+                list.add(result);
+                return list;
             }
         };
         return responsePacker.pack(null, dataRequest);

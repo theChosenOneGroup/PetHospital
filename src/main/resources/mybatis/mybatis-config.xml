@@ -31,5 +31,6 @@
     <mapper resource="mybatis/OfficeMapper.xml"/>
     <mapper resource="mybatis/AdminMapper.xml"/>
     <mapper resource="mybatis/PicAndVideoMapper.xml"/>
+    <mapper resource="mybatis/CaseMapper.xml"/>
   </mappers>
 </configuration>
