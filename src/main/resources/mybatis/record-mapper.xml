@@ -7,9 +7,10 @@
     UPDATE record
     <set>
       <if test="description != null">description=#{description},</if>
-      <if test="contentType != null">content_type=#{contentType}</if>
+      <if test="contentType != null">content_type=#{contentType},</if>
+      <if test="priority != null">priority=#{priority}</if>
     </set>
-    where created_time = #{createdTime} and rand = #{rand} and sequence = #{sequence};
+    WHERE created_time = #{createdTime} and rand = #{rand} and sequence = #{sequence};
   </update>
 
   <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Record">
@@ -18,6 +19,7 @@
       rand,
       sequence,
       content_type AS contentType,
+      priority,
       description
     FROM record
     LIMIT #{start}, #{end};
@@ -29,9 +31,11 @@
       rand,
       sequence,
       content_type AS contentType,
+      priority,
       description
     FROM record
-    WHERE created_time = #{createdTime} AND rand = #{rand};
+    WHERE created_time = #{createdTime} AND rand = #{rand}
+    ORDER BY priority;
   </select>
 
   <select id="count" resultType="Long">
@@ -50,6 +54,7 @@
   </delete>
 
   <insert id="create" parameterType="base.model.Record">
-    INSERT INTO record VALUE (#{createdTime}, #{rand}, #{sequence}, #{contentType}, #{description});
+    INSERT INTO record (created_time, rand, sequence, content_type, priority, description)
+      VALUE (#{createdTime}, #{rand}, #{sequence}, #{contentType}, #{priority}, #{description});
   </insert>
 </mapper>

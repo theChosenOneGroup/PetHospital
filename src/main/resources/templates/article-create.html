@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" src="../static/css/layout.css"
+        th:src="@{/css/layout.css}"/>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="../static/js/jquery.2.1.1.min.js" th:src="@{/js/jquery.2.1.1.min.js}"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Pet Hospital</title>
+  <script>
+    function pictureInput() {
+      return '<div class="picture-in media-in article-record">' + inputGroup(pictureTitle())
+          + hovers();
+      '</div>';
+    }
+
+    function filmInput() {
+      return '<div class="film-in media-in article-record">' + inputGroup(filmTitle()) + hovers()
+          + '</div>';
+    }
+
+    function textInput() {
+      return '<div class="text-in media-in article-record">' +
+          '<div class="input-group media-in">' +
+          '<span class="input-group-addon">' +
+          '<span class="glyphicon glyphicon-file"></span> Description</span>' +
+          '<lable class="record-id" upload="false" sequence="" style="display:none;"></lable>' +
+          '<input class="record-title form-control" type="text"/>' +
+          '<span class="input-group-addon glyphicon glyphicon-upload text-upload"></span>' +
+          '<span class="input-group-addon glyphicon glyphicon-remove"></span>' +
+          '</div>' +
+          '<div class="input-group" style="">' +
+          '<textarea class="text-input form-control" rows="4" cols="100"></textarea>' +
+          '</div>' + hovers() +
+          '</div>';
+    }
+
+    function blankInput() {
+      return '<div class="media-in">' + hovers() + '</div>';
+    }
+
+    function inputGroup(title) {
+      return '<div class="input-group">' +
+          '<span class="input-group-addon">' + title + 'Description</span>'+
+          '<input class="form-control record-title" type="text"/>' +
+          '<input class="file-input" type="file" style="display:none"/>' +
+          '<lable class="record-id" upload="false" sequence="" style="display:none;"></lable>'+
+          '<span class="input-group-addon glyphicon glyphicon-upload file-upload"></span>' +
+          '<span class="input-group-addon glyphicon glyphicon-remove"></span>' +
+          '</div>' +
+          '<div class="input-group">' +
+          '<input type="text" class="file-show form-control"/>' +
+          '<span class="input-group-addon">' +
+          '<span class="glyphicon glyphicon-folder-open"></span></span>' +
+          '</div>';
+    }
+
+    function filmTitle(){
+      return '<span class="glyphicon glyphicon-film"></span>';
+    }
+
+    function pictureTitle() {
+      return '<span class="glyphicon glyphicon-picture"></span>';
+    }
+
+    function articleTitle() {
+      return '<div class="input-group">'+
+          '<span class="input-group-addon">' +
+          '<span class="glyphicon"></span>Article title</span>' +
+          '<input id="article-title" type="text" class="form-control"/>'+
+          '</div>';
+    }
+
+    function articleCommit() {
+      return '<div>' +
+          '<button id="commit-button" type="button" class="btn btn-default">Commit</button>' +
+          '<button id="cancel-button" type="button" class="btn btn-default">Cancel</button>' +
+          '</div>';
+    }
+
+    function hovers() {
+      return '<div>' +
+      '<ul class="pagination">' +
+      '<li><a><span class="glyphicon glyphicon-plus"></span></a></li>' +
+      '<li><a><span class="glyphicon glyphicon-file new-text-input"></span></a></li>' +
+      '<li><a><span class="glyphicon glyphicon-picture new-picture-input"></span></a></li>' +
+      '<li><a><span class="glyphicon glyphicon-film new-film-input"></span></a></li>' +
+      '</ul>' +
+      '</div>';
+    }
+  </script>
+
+  <script>
+    $(document).on('click', '.new-text-input', function () {
+      $(this).parents('.media-in').after(textInput());
+    });
+    $(document).on('click', '.new-film-input', function () {
+      $(this).parents('.media-in').after(filmInput());
+    });
+    $(document).on('click', '.new-picture-input', function () {
+      $(this).parents('.media-in').after(pictureInput());
+    });
+
+    $(document).on('click', '.glyphicon-remove', function () {
+      var parent = $(this).parents(".media-in");
+      if (parent.find(".record-id").attr("upload") == 'true') {
+        if ($('#article-id').attr('exist') === false) {
+          alert("Can't find article id");
+        }
+        $.ajax({
+          url: '/record/' + $('#article-id').attr('createdTime') + '/' + $('#article-id').attr(
+              'rand') + "/" + parent.find(".record-id").attr("sequence"),
+          method: "DELETE",
+          cache: false,
+          processData: false,
+          contentType: false
+        }).done(function (response) {
+          if (response.code == '100001') {
+            alert("Deletion is successful");
+          } else {
+            alert("Deletion is failed");
+          }
+        });
+      }
+      parent.remove();
+    });
+
+    $(document).on('click', '.glyphicon-folder-open', function () {
+      var file=$(this).parents(".media-in").find(".file-input");
+      file.click();
+      $(file).change(function () {
+        $(this).parents(".media-in").find(".file-show").val($(this).val());
+      })
+    });
+
+    $(document).on('click','#commit-button',function () {
+      if($('#article-title').val()!==''){
+          updateArticle();
+          commitArticle();
+      } else {
+        alert("Please enter the article title");
+      }
+
+    });
+
+    $(document).on('click', '.text-upload', function () {
+      var parent = $(this).parents(".media-in");
+      if ($.trim(parent.find('.record-title').val()).length === 0) {
+        alert("Please enter the description");
+        return;
+      }
+      if ($.trim(parent.find('.text-input').val()).length === 0) {
+        alert("Please enter the content");
+        return;
+      }
+      if ($('#article-id').attr('exist') === false) {
+        alert("Can't find article id");
+      }
+      var formData = new FormData();
+      formData.append('description', parent.find('.record-title').val());
+      formData.append('createdTime', $('#article-id').attr('createdTime'));
+      formData.append('rand', $('#article-id').attr('rand'));
+      formData.append('content', parent.find('.text-input').val());
+      $.ajax({
+        url: '/record',
+        method: "POST",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false
+      }).done(function (response) {
+        if (response.code == '100001') {
+          parent.find(".record-id").attr({upload: true, sequence: response.result[0].sequence});
+          alert("Upload is successful");
+        } else {
+          alert("Upload is failed");
+        }
+      });
+    });
+
+    $(document).on('click', '.file-upload', function () {
+      var parent = $(this).parents(".media-in");
+      if ($.trim(parent.find('.record-title').val()).length === 0) {
+        alert("Please enter the description");
+        return;
+      }
+      if (parent.find('.file-input')[0].files[0] == null) {
+        alert("Please choose a file");
+        return;
+      }
+      if ($('#article-id').attr('exist') === false) {
+        alert("Can't find article id");
+      }
+      var formData = new FormData();
+      formData.append('description', parent.find('.record-title').val());
+      formData.append('createdTime', $('#article-id').attr('createdTime'));
+      formData.append('rand', $('#article-id').attr('rand'));
+      formData.append('file', parent.find('.file-input')[0].files[0]);
+      $.ajax({
+        url: '/record',
+        method: "POST",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false
+      }).done(function (response) {
+        if (response.code == '100001') {
+          parent.find(".record-id").attr({upload: true, sequence: response.result[0].sequence});
+          alert("Upload is successful");
+        } else {
+          alert("Upload is failed");
+        }
+      });
+    });
+
+    $(document).ready(function () {
+      $('.article-body').append(articleTitle());
+      $('.article-body').append(blankInput());
+      $('.article-body').append(articleCommit());
+      createArticle();
+    });
+  </script>
+
+  <script>
+    function commitArticle() {
+      var record = {
+        createdTime: $('#article-id').attr("createdTime"),
+        rand: $('#article-id').attr('rand'),
+        priority: 0
+      };
+
+      $(".article-body").find(".article-record").each(function () {
+        if ($(this).find(".record-id").attr("upload") === false) {
+          alert("Please upload the chosen file");
+          return;
+        }
+        record.sequence = $(this).find(".record-id").attr("sequence");
+        $.ajax({
+          url: "/record",
+          type: 'PUT',
+          data: JSON.stringify(record),
+          cache: false,
+          processData: false,
+          contentType: "application/json",
+          success: function (res) {
+            if (res.code != '100001') {
+              alert("Error response code "+res.code);
+            }
+          }
+        });
+        record.priority++;
+      });
+    }
+
+    function updateArticle() {
+      if ($('#article-id').attr('exist') === false) {
+        alert("article id doesn't exist");
+        return;
+      }
+      var obj = {};
+      obj.createdTime = $('#article-id').attr('createdTime');
+      obj.rand = $('#article-id').attr('rand');
+      obj.description=$("#article-title").val();
+      $.ajax({
+        url:'/article',
+        type:'PUT',
+        data:JSON.stringify(obj),
+        cache:false,
+        processData:false,
+        contentType:"application/json",
+        success:function (response) {
+          if(response.code != '100001'){
+            alert("Some error occurred");
+          }
+        }
+      });
+    }
+
+    function createArticle() {
+      $.ajax({
+        url: '/article',
+        type: 'POST',
+        processData: false,
+        cache: false,
+        contentType: false
+      }).done(function (response) {
+        if (response.code == '100001') {
+          $('#article-id').attr({
+            createdTime: response.result[0].createdTime,
+            rand: response.result[0].rand,
+            exist: true
+          });
+        } else {
+          alert("Some error occurred when creating article");
+          return;
+        }
+      });
+    }
+  </script>
+  <style>
+    .pagination {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="header::header"/>
+<div th:replace="sidebar::demo"/>
+
+<div class="container col-sm-8">
+  <div>
+    <div class="article-body panel panel-default">
+      <label id="article-id" exist="false" createdTime="" rand="" style="display:none;"/>
+      <div class="panel-heading">Center Area</div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ public class ArticleController extends BaseController {
     this.articleDao = articleDao;
   }
 
+  @Autowired
   public void setArticleService(ArticleService articleService) {
     this.articleService = articleService;
   }
@@ -42,6 +44,13 @@ public class ArticleController extends BaseController {
       @RequestParam Integer pageSize) {
     return responsePacker.pack(JsonUtil.toMap("page", page, "pageSize", pageSize), () ->
         articleDao.retrieve(new Page(page, pageSize)));
+  }
+
+  @GetMapping("/article/{createdTime}/{rand}")
+  public ResponseWrapper retrieveArticle(@PathVariable Long createdTime,
+      @PathVariable Integer rand) {
+    return responsePacker.pack(null,
+        () -> articleService.retrieve(new Article(createdTime, rand, null)));
   }
 
   @GetMapping(value="/article/count")

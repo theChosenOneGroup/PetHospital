@@ -6,9 +6,10 @@ CREATE TABLE article (
 );
 
 CREATE TABLE record (
-  created_time BIGINT NOT NULL,
+  created_time BIGINT   NOT NULL,
   rand         SMALLINT NOT NULL,
   sequence     SMALLINT NOT NULL,
+  priority     SMALLINT,
   content_type VARCHAR(100),
   description  VARCHAR(255),
   PRIMARY KEY (created_time, rand, sequence),

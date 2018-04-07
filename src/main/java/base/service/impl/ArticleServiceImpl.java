@@ -8,6 +8,7 @@ import base.service.ArticleService;
 import base.service.FileStore;
 import base.service.Uniqueness;
 import java.io.IOException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,9 @@ public class ArticleServiceImpl implements ArticleService {
     }
     recordDao.deleteArticle(article);
     articleDao.delete(article);
+  }
+
+  public List<Record> retrieve(Article article) {
+    return recordDao.retrieveArticle(article);
   }
 }

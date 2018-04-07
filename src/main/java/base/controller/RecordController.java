@@ -111,15 +111,15 @@ public class RecordController extends BaseController {
           return true;
         }
       } catch (Exception e) {
+        record.flip();
       }
-      record.flip();
     }
     return false;
   }
 
-  @GetMapping(value = "/record/download")
-  public void download(@RequestParam Long createdTime, @RequestParam Integer rand,
-      @RequestParam Integer sequence, @RequestParam String contentType,
+  @GetMapping(value = "/record/{createdTime}/{rand}/{sequence}")
+  public void download(@PathVariable Long createdTime, @PathVariable Integer rand,
+      @PathVariable Integer sequence, @RequestParam String contentType,
       HttpServletResponse response) {
     Record record = new Record(createdTime, rand, sequence, contentType, null);
     InputStream in = null;

@@ -1,6 +1,8 @@
 package base.service;
 
 import base.model.Article;
+import base.model.Record;
+import java.util.List;
 
 /**
  * @author long
@@ -9,4 +11,6 @@ import base.model.Article;
 public interface ArticleService {
 
   void delete(Article article);
+
+  List<Record> retrieve(Article article);
 }
