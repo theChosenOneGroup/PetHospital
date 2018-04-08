@@ -1,4 +1,5 @@
-CREATE DATABASE db_example;
+CREATE DATABASE db_example
+  CHARACTER SET utf8;
 CREATE USER 'test'@'localhost'
   IDENTIFIED BY 'test@MYSQL2018';
 GRANT ALL ON db_example.* TO 'test'@'localhost';

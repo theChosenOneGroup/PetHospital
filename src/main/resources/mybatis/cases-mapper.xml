@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.CasesDao">
+  <insert id="create" parameterType="base.model.Cases">
+    INSERT INTO cases (disease_id, created_time, rand)
+      VALUE (#{diseaseId}, #{createdTime}, #{rand});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Cases">
+    DELETE FROM cases
+    WHERE disease_id = #{diseaseId} AND created_time = #{createdTime} AND rand = #{rand};
+  </delete>
+
+  <select id="retrieveArticle" parameterType="base.model.Cases" resultType="base.model.Article">
+    SELECT
+      created_time AS createdTime,
+      rand
+    FROM cases
+    WHERE disease_id = #{diseaseId};
+  </select>
+</mapper>

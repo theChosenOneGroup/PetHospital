@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.DepartmentDao">
+  <update id="update" parameterType="base.model.Department">
+    UPDATE department
+    <set>
+      <if test="name != null">name=#{name},</if>
+      <if test="category != null">category=#{category}</if>
+    </set>
+    WHERE id=#{id};
+  </update>
+
+  <insert id="create" parameterType="base.model.Department">
+    INSERT INTO department (id, name, category)
+      VALUE (#{id}, #{name}, #{category});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Department">
+    DELETE FROM department
+    WHERE id = #{id};
+  </delete>
+
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Department">
+    SELECT
+      id,
+      name,
+      category,
+      create_time AS createTime,
+      update_time AS updateTime
+    FROM department
+    LIMIT #{start}, #{end};
+  </select>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM department;
+  </select>
+</mapper>

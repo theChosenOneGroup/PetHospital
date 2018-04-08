@@ -26,5 +26,8 @@
     <mapper resource="mybatis/user-mapper.xml"/>
     <mapper resource="mybatis/article-mapper.xml"/>
     <mapper resource="mybatis/record-mapper.xml"/>
+    <mapper resource="mybatis/department-mapper.xml"/>
+    <mapper resource="mybatis/disease-mapper.xml"/>
+    <mapper resource="mybatis/cases-mapper.xml"/>
   </mappers>
 </configuration>

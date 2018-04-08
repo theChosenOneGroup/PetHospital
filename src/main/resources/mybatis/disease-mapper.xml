@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.DiseaseDao">
+  <update id="update" parameterType="base.model.Disease">
+    UPDATE disease
+    <set>
+      <if test="name != null">name=#{name}</if>
+    </set>
+    WHERE id=#{id};
+  </update>
+
+  <insert id="create" parameterType="base.model.Disease">
+    INSERT INTO disease (id,d_id, name)
+      VALUE (#{id}, #{departmentId}, #{name});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Disease">
+    DELETE FROM disease
+    WHERE id = #{id};
+  </delete>
+
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Disease">
+    SELECT
+      id,
+      d_id        AS departmentId,
+      name,
+      create_time AS createTime,
+      update_time AS updateTime
+    FROM disease
+    LIMIT #{start}, #{end};
+  </select>
+
+  <select id="retrieveDepartment" parameterType="base.model.Department"
+    resultType="base.model.Disease">
+    SELECT
+      id,
+      d_id        AS departmentId,
+      name,
+      create_time AS createTime,
+      update_time AS updateTime
+    FROM disease
+    WHERE d_id = #{id}
+  </select>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM disease;
+  </select>
+</mapper>
