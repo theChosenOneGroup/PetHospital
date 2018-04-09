@@ -9,6 +9,13 @@
     LIMIT #{start}, #{end}
   </select>
 
+  <select id="retrieveQuestion" parameterType="base.model.Question"
+    resultType="base.model.Question">
+    SELECT *
+    FROM question
+    WHERE id = #{id};
+  </select>
+
   <insert id="create" parameterType="base.model.Question">
     INSERT INTO question (id, description, type) VALUE
       (#{id}, #{description}, #{type});

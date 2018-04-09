@@ -67,4 +67,12 @@ public class QuestionDaoImpl extends BaseDaoImp<Question> implements QuestionDao
   public int deleteQuestion(Question question) {
     return optionDao.deleteQuestion(question);
   }
+
+  public Question retrieveQuestion(Question question) {
+    Question result =
+        (Question)
+            execute((session) -> session.selectOne(namespace() + ".retrieveQuestion", question));
+    result.setOptions(optionOfQuestion(question));
+    return result;
+  }
 }

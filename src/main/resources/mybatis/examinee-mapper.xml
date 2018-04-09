@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.impl.ExamineeDao">
+  <insert id="create" parameterType="base.model.Examinee">
+    INSERT INTO examinee (u_id, e_id) VALUE
+      (#{userId}, #{examId});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Examinee">
+    DELETE FROM examinee
+    WHERE e_id = #{examId} AND u_id = #{userId};
+  </delete>
+
+  <delete id="deleteByExam" parameterType="base.model.Exam">
+    DELETE FROM examinee
+    WHERE e_id = #{id};
+  </delete>
+
+  <delete id="deleteByUser" parameterType="base.model.User">
+    DELETE FROM examinee
+    WHERE u_id = #{id};
+  </delete>
+</mapper>

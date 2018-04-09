@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.impl.QuestionnaireDao">
+  <select id="questionnaire" parameterType="base.model.Exam" resultType="Long">
+    SELECT q_id
+    FROM questionnaire
+    WHERE e_id = #{id};
+  </select>
+
+  <insert id="create" parameterType="base.model.Questionnaire">
+    INSERT INTO questionnaire (e_id, q_id) VALUE
+      (#{examId}, #{questionId});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Questionnaire">
+    DELETE FROM questionnaire
+    WHERE e_id = #{examId} AND q_id = #{questionId};
+  </delete>
+
+  <delete id="deleteQuestionnaire" parameterType="base.model.Exam">
+    DELETE FROM questionnaire
+    WHERE e_id = #{id};
+  </delete>
+</mapper>

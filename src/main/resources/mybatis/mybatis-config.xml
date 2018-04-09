@@ -32,5 +32,8 @@
     <mapper resource="mybatis/job-mapper.xml"/>
     <mapper resource="mybatis/question-mapper.xml"/>
     <mapper resource="mybatis/options-mapper.xml"/>
+    <mapper resource="mybatis/exam-mapper.xml"/>
+    <mapper resource="mybatis/questionnaire-mapper.xml"/>
+    <mapper resource="mybatis/examinee-mapper.xml"/>
   </mappers>
 </configuration>

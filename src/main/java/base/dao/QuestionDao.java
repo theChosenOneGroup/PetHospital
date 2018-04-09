@@ -16,4 +16,6 @@ public interface QuestionDao extends BaseDao<Question> {
   int deleteOption(Option option);
 
   int deleteQuestion(Question question);
+
+  Question retrieveQuestion(Question question);
 }

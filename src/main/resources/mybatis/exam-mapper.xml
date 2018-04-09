@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.ExamDao">
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Exam">
+    SELECT *
+    FROM exam
+    LIMIT #{start}, #{end}
+  </select>
+
+  <insert id="create" parameterType="base.model.Exam">
+    INSERT INTO exam (id, title, start, end, length) VALUE
+      (#{id}, #{title}, #{start}, #{end}, #{length})
+  </insert>
+
+  <update id="update" parameterType="base.model.Exam">
+    UPDATE exam
+    <set>
+      <if test="title != null">title=#{title},</if>
+      <if test="start != null">start=#{start},</if>
+      <if test="end !=null">end=#{end},</if>
+      <if test="length != null">length=#{length}</if>
+    </set>
+    WHERE id=#{id}
+  </update>
+
+  <delete id="delete" parameterType="base.model.Exam">
+    DELETE FROM exam
+    WHERE id = #{id};
+  </delete>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM exam;
+  </select>
+</mapper>
