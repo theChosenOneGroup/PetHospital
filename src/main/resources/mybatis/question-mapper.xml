@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.QuestionDao">
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Question">
+    SELECT *
+    FROM question
+    LIMIT #{start}, #{end}
+  </select>
+
+  <insert id="create" parameterType="base.model.Question">
+    INSERT INTO question (id, description, type) VALUE
+      (#{id}, #{description}, #{type});
+  </insert>
+
+  <update id="update" parameterType="base.model.Question">
+    UPDATE question
+    <set>
+      <if test="description != null">description=#{description}</if>
+      <if test="type != null">type=#{type}</if>
+    </set>
+    WHERE id=#{id}
+  </update>
+
+  <delete id="delete" parameterType="base.model.Question">
+    DELETE FROM question
+    WHERE id = #{id};
+  </delete>
+</mapper>

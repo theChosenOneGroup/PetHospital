@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.OptionDao">
+  <select id="optionOfQuestion" parameterType="base.model.Question"
+    resultType="base.model.Option">
+    SELECT
+      q_id AS questionId,
+      sequence,
+      description,
+      valid
+    FROM options
+    WHERE q_id = #{id}
+  </select>
+
+  <insert id="create" parameterType="base.model.Option">
+    INSERT INTO options (q_id, sequence, description, valid) VALUE
+      (#{questionId}, #{sequence}, #{description}, #{valid});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Option">
+    DELETE FROM options
+    WHERE q_id = #{questionId} AND sequence = #{sequence};
+  </delete>
+
+  <delete id="deleteQuestion" parameterType="base.model.Question">
+    DELETE FROM options
+    WHERE q_id = #{id};
+  </delete>
+</mapper>
