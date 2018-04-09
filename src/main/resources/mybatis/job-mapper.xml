@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.JobDao">
+  <update id="update" parameterType="base.model.Job">
+    UPDATE job
+    <set>
+      <if test="name != null">name=#{name},</if>
+      <if test="description != null">description=#{description},</if>
+      <if test="position != null">position=#{position},</if>
+      <if test="createdTime != null">created_time=#{createdTime}</if>
+      <if test="rand != null">rand=#{rand}</if>
+    </set>
+    WHERE id=#{id};
+  </update>
+
+  <insert id="create" parameterType="base.model.Job">
+    INSERT INTO disease (id, name, descripiton, position, created_time, rand)
+    VALUE (#{id}, #{name}, #{description}, #{position}, #{createdTime}, #{rand});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Job">
+    DELETE FROM job
+    WHERE id = #{id};
+  </delete>
+
+  <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Job">
+    SELECT
+    id,
+    name,
+    description,
+    position,
+    created_time AS createdTime,
+    rand
+    FROM job
+    LIMIT #{start}, #{end};
+  </select>
+
+  <select id="jobOfPosition" parameterType="base.model.Job"
+    resultType="base.model.Job">
+    SELECT
+    id,
+    name,
+    description,
+    position,
+    created_time AS createdTime,
+    rand
+    FROM job
+    WHERE position = #{position};
+  </select>
+
+  <select id="count" resultType="Long">
+    SELECT count(*)
+    FROM job;
+  </select>
+</mapper>

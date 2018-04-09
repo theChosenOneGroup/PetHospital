@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" src="../static/css/layout.css"
+        th:src="@{/css/layout.css}"/>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="../static/js/jquery.2.1.1.min.js" th:src="@{/js/jquery.2.1.1.min.js}"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../static/js/article-view.js" th:src="@{/js/article-view.js}"></script>
+  <title>Pet Hospital</title>
+
+  <style>
+    .job-item{
+      border-style: solid;
+    }
+  </style>
+  <script>
+    $(document).ready(function () {
+      retrieveJobList('FRONT');
+    });
+
+    $(document).on('click','.role-item',function () {
+      retrieveJobList($(this).attr('value'));
+    });
+
+    function retrieveJobList(role){
+      $.ajax({
+        url:'/job/'+role,
+        type:'GET',
+        data:false,
+        processData:false
+      }).done(function (res) {
+        if(res.code != '100001'){
+          alert("Error response code");
+          return;
+        }
+        $('.job-list').empty();
+        res.result.forEach(function (value) {
+          alert(jobItem(value));
+          $(".job-list").append(jobItem(value));
+        })
+      });
+    }
+    // <![CDATA[
+    function jobItem(value) {
+      return '<a href="' + articleUrl(value) + '"><div class="job-item col-sm-3"' + '><h2>'
+          + value.name + '</h2><p class="lead">' + value.description + '</p></div></a>';
+
+    }
+    //]]>
+
+    function articleUrl(value) {
+      return '/article/view/' + value.createdTime + '/' + value.rand;
+    }
+  </script>
+</head>
+<body>
+<div th:replace="header::header"/>
+<div th:fragment="demo" class="container pull-left col-sm-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">角色</div>
+    <ul class="list-group">
+      <li class="list-group-item role-item" value="FRONT"><a>前台</a></li>
+      <li class="list-group-item role-item" value="ASSISTANT"><a>医助</a></li>
+      <li class="list-group-item role-item" value="VET"><a>兽医</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container col-sm-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">Center Area</div>
+    <div style="width:100%;height:800px">
+      <div class="job-list"></div>
+   </div>
+  </div>
+</div>
+</body>
+</html>
