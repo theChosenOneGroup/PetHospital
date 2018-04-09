@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base.dao.impl.AnswerDao">
+  <insert id="create" parameterType="base.model.Answer">
+    INSERT INTO answer (u_id, e_id, q_id, sequence, phrase) VALUE
+      (#{userId}, #{examId}, #{questionId}, #{sequence}, #{phrase});
+  </insert>
+
+  <delete id="delete" parameterType="base.model.Answer">
+    DELETE FROM answer
+    WHERE u_id = #{userId} AND e_id = #{examId} AND q_id = #{questionId};
+  </delete>
+
+  <select id="answerOfExaminee" resultType="base.model.Answer" parameterType="base.model.Examinee">
+    SELECT
+      u_id AS userId,
+      e_id AS examId,
+      q_id AS questionId,
+      sequence,
+      phrase
+    FROM answer
+    WHERE u_id = #{userId} AND e_id = #{examId};
+  </select>
+</mapper>

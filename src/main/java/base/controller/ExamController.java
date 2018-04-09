@@ -1,7 +1,9 @@
 package base.controller;
 
 import base.dao.ExamDao;
+import base.model.Answer;
 import base.model.Exam;
+import base.model.Examinee;
 import base.model.Page;
 import base.model.Question;
 import base.model.User;
@@ -9,9 +11,7 @@ import base.model.response.ResponseWrapper;
 import base.util.JsonUtil;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import java.util.List; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 18-4-9
  */
 @RestController
-public class ExamController extends BaseController{
+public class ExamController extends BaseController {
 
   private ExamDao examDao;
 
@@ -176,5 +176,24 @@ public class ExamController extends BaseController{
           }
           return null;
         });
+  }
+
+  @PostMapping("/exam/answer")
+  public ResponseWrapper addAnswer(@RequestBody List<Answer> answerList) {
+    return messagePacker.pack(
+        null,
+        () -> {
+          for (Answer ans : answerList) {
+            if (0 == examDao.addAnswer(ans)) {
+              throw new RuntimeException("Creation is failed");
+            }
+          }
+          return null;
+        });
+  }
+
+  @GetMapping("/exam/answer/{examId}/{userId}")
+  public ResponseWrapper answerOfExaminee(@PathVariable Long examId, @PathVariable Long userId) {
+    return responsePacker.pack(null, () -> examDao.answerOf(new Examinee(examId, userId)));
   }
 }

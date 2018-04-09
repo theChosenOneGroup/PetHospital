@@ -1,6 +1,8 @@
 package base.dao;
 
+import base.model.Answer;
 import base.model.Exam;
+import base.model.Examinee;
 import base.model.Question;
 import base.model.User;
 import java.util.List;
@@ -25,4 +27,10 @@ public interface ExamDao extends BaseDao<Exam> {
   int deleteExaminee(Exam exam);
 
   int deleteExaminee(User user);
+
+  int addAnswer(Answer answer);
+
+  int deleteAnswer(Answer answer);
+
+  List<Answer> answerOf(Examinee examinee);
 }

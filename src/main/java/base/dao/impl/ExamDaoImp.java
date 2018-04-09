@@ -1,6 +1,7 @@
 package base.dao.impl;
 
 import base.dao.ExamDao;
+import base.model.Answer;
 import base.model.Exam;
 import base.model.Examinee;
 import base.model.Question;
@@ -21,6 +22,8 @@ public class ExamDaoImp extends BaseDaoImp<Exam> implements ExamDao {
 
   private ExamineeDao examineeDao;
 
+  private AnswerDao answerDao;
+
   @Autowired
   public void setQuestionnaireDao(QuestionnaireDao questionnaireDao) {
     this.questionnaireDao = questionnaireDao;
@@ -29,6 +32,11 @@ public class ExamDaoImp extends BaseDaoImp<Exam> implements ExamDao {
   @Autowired
   public void setExamineeDao(ExamineeDao examineeDao) {
     this.examineeDao = examineeDao;
+  }
+
+  @Autowired
+  public void setAnswerDao(AnswerDao answerDao) {
+    this.answerDao = answerDao;
   }
 
   public String namespace() {
@@ -73,5 +81,17 @@ public class ExamDaoImp extends BaseDaoImp<Exam> implements ExamDao {
       throw new RuntimeException("Deletion is failed");
     }
     return super.delete(exam);
+  }
+
+  public int deleteAnswer(Answer answer) {
+    return answerDao.delete(answer);
+  }
+
+  public int addAnswer(Answer answer) {
+    return answerDao.create(answer);
+  }
+
+  public List<Answer> answerOf(Examinee examinee) {
+    return answerDao.answerOfExaminee(examinee);
   }
 }

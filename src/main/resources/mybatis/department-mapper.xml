@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="base.dao.DepartmentDao">
-  <update id="update" parameterType="base.model.Department">
+<!--  <update id="update" parameterType="base.model.Department">
     UPDATE department
     <set>
       <if test="name != null">name=#{name},</if>
@@ -55,5 +55,5 @@
   <select id="count" resultType="Long">
     SELECT count(*)
     FROM department;
-  </select>
+  </select>-->
 </mapper>

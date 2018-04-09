@@ -26,7 +26,7 @@
     <mapper resource="mybatis/user-mapper.xml"/>
     <mapper resource="mybatis/article-mapper.xml"/>
     <mapper resource="mybatis/record-mapper.xml"/>
-    <mapper resource="mybatis/department-mapper.xml"/>
+    <!--<mapper resource="mybatis/department-mapper.xml"/>-->
     <mapper resource="mybatis/disease-mapper.xml"/>
     <mapper resource="mybatis/cases-mapper.xml"/>
     <mapper resource="mybatis/job-mapper.xml"/>
@@ -35,5 +35,6 @@
     <mapper resource="mybatis/exam-mapper.xml"/>
     <mapper resource="mybatis/questionnaire-mapper.xml"/>
     <mapper resource="mybatis/examinee-mapper.xml"/>
+    <mapper resource="mybatis/answer-mapper.xml"/>
   </mappers>
 </configuration>
