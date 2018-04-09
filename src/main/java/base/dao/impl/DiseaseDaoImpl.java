@@ -20,8 +20,12 @@ public class DiseaseDaoImpl extends BaseDaoImp<Disease> implements DiseaseDao {
     return namespace;
   }
 
-  public List<Disease> diseaseOfDepartment(Department department) {
+  public List<String> categoryOfDisease() {
+    return (List<String>) execute((session) -> session.selectList(namespace() + ".categoryOfDisease"));
+  }
+
+  public List<Disease> diseaseOfCategory(String category) {
     return (List<Disease>)
-        execute((session) -> session.selectList(namespace + ".retrieveDepartment", department));
+        execute((session) -> session.selectList(namespace() + ".diseaseOfCategory", category));
   }
 }

@@ -29,5 +29,6 @@
     <mapper resource="mybatis/department-mapper.xml"/>
     <mapper resource="mybatis/disease-mapper.xml"/>
     <mapper resource="mybatis/cases-mapper.xml"/>
+    <mapper resource="mybatis/job-mapper.xml"/>
   </mappers>
 </configuration>

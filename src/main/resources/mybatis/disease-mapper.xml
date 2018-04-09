@@ -7,13 +7,14 @@
     UPDATE disease
     <set>
       <if test="name != null">name=#{name}</if>
+      <if test="category != null">category=#{category}</if>
     </set>
     WHERE id=#{id};
   </update>
 
   <insert id="create" parameterType="base.model.Disease">
-    INSERT INTO disease (id,d_id, name)
-      VALUE (#{id}, #{departmentId}, #{name});
+    INSERT INTO disease (id, name, category)
+      VALUE (#{id}, #{name}, #{category});
   </insert>
 
   <delete id="delete" parameterType="base.model.Disease">
@@ -24,8 +25,9 @@
   <select id="retrieve" parameterType="base.model.Page" resultType="base.model.Disease">
     SELECT
       id,
-      d_id        AS departmentId,
+      #       d_id        AS departmentId,
       name,
+      category,
       create_time AS createTime,
       update_time AS updateTime
     FROM disease
@@ -36,12 +38,30 @@
     resultType="base.model.Disease">
     SELECT
       id,
-      d_id        AS departmentId,
+      #       d_id        AS departmentId,
       name,
+      category,
       create_time AS createTime,
       update_time AS updateTime
     FROM disease
     WHERE d_id = #{id}
+  </select>
+
+  <select id="categoryOfDisease" resultType="String">
+    SELECT DISTINCT category
+    FROM disease
+    WHERE NOT category IS NULL;
+  </select>
+
+  <select id="diseaseOfCategory" parameterType="String" resultType="base.model.Disease">
+    SELECT
+      id,
+      name,
+      category,
+      create_time AS createTime,
+      update_time AS updateTime
+    FROM disease
+    WHERE category = #{category}
   </select>
 
   <select id="count" resultType="Long">

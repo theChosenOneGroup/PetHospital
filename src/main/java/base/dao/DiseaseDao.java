@@ -9,5 +9,7 @@ import java.util.List;
  * @since 18-4-7
  */
 public interface DiseaseDao extends BaseDao<Disease> {
-  List<Disease> diseaseOfDepartment(Department department);
+  List<String> categoryOfDisease();
+
+  List<Disease> diseaseOfCategory(String category);
 }

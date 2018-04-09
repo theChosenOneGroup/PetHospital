@@ -88,14 +88,14 @@ public class DiseaseController extends BaseController {
         });
   }
 
-  @GetMapping("/disease/department/{departmentId}")
-  public ResponseWrapper retrieveDepartment(@PathVariable Short departmentId) {
+  @GetMapping("/disease/categorylist")
+  public ResponseWrapper categoryOfDisease() {
+    return responsePacker.pack(null, () -> diseaseDao.categoryOfDisease());
+  }
+
+  @GetMapping("/disease/category")
+  public ResponseWrapper diseaseOfCategory(@RequestParam String category) {
     return responsePacker.pack(
-        null,
-        () -> {
-          Department department = new Department();
-          department.setId(departmentId);
-          return diseaseDao.diseaseOfDepartment(department);
-        });
+        JsonUtil.toMap("category", category), () -> diseaseDao.diseaseOfCategory(category));
   }
 }

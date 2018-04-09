@@ -1,14 +1,14 @@
 function rowWrapper(content) {
-  return '<div class="row media">' + content + '</div>';
+  return '<div class="row media col-sm-11">' + content + '</div>';
 }
 
 function video(src) {
-  return '<video class="col-sm-11" controls="controls">' + '<source src="' + src
+  return '<video class="" controls="controls">' + '<source src="' + src
       + '" type="video/ogg"/>' + '</video> '
 }
 
 function picture(src) {
-  return '<img class="col-sm-11" src="' + src + '"></img>';
+  return '<img class="" src="' + src + '"></img>';
 }
 
 function appendText(body, value) {
@@ -30,6 +30,7 @@ function text(title, content) {
 
 function constructBody(result) {
   var body = $('.article-body');
+  body.empty();
   result.forEach(function (value) {
     if (category(value.contentType) === 'video') {
       body.append(rowWrapper(video(recordUrl(value))));
@@ -48,7 +49,7 @@ function recordUrl(value) {
 }
 
 function category(contentType) {
-  if (contentType.indexOf("application") === 0) {
+  if (contentType.indexOf("audio") === 0) {
     return 'video';
   } else if (contentType.indexOf("image") === 0) {
     return "image";

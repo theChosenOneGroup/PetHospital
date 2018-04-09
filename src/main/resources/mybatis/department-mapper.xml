@@ -33,6 +33,25 @@
     LIMIT #{start}, #{end};
   </select>
 
+  <select id="departmentOfCategory" parameterType="base.model.Department"
+    resultType="base.model.Department">
+    SELECT
+      id,
+      name,
+      category,
+      create_time AS createTime,
+      update_time AS updateTime
+    FROM department
+    WHERE category = #{category}
+  </select>
+
+  <select id="categoryList" resultType="String">
+    SELECT DISTINCT category
+    FROM department
+    WHERE not category is NULL;
+
+  </select>
+
   <select id="count" resultType="Long">
     SELECT count(*)
     FROM department;

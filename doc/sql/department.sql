@@ -1,20 +1,21 @@
-CREATE TABLE department (
-  id           SMALLINT     NOT NULL,
-  name         VARCHAR(255) NOT NULL UNIQUE,
-  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-  update_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-  category VARCHAR(255),
-  PRIMARY KEY (id)
-);
+# CREATE TABLE department (
+#   id           SMALLINT     NOT NULL,
+#   name         VARCHAR(255) NOT NULL UNIQUE,
+#   create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+#   update_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+#   category VARCHAR(255),
+#   PRIMARY KEY (id)
+# );
 
 CREATE TABLE disease (
-  id           INT          NOT NULL,
-  d_id         SMALLINT     NOT NULL,
-  name         VARCHAR(255) NOT NULL,
+  id          INT          NOT NULL,
+  #   d_id         SMALLINT     NOT NULL,
+  name        VARCHAR(255) NOT NULL,
+  category    VARCHAR(64)  NOT NULL,
   create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  FOREIGN KEY (d_id) REFERENCES department (id)
+  PRIMARY KEY (id)
+  #   FOREIGN KEY (d_id) REFERENCES department (id)
 );
 
 INSERT INTO department (id, name) VALUES

@@ -10,9 +10,9 @@ public class Disease {
 
   private Integer id;
 
-  private Short departmentId;
-
   private String name;
+
+  private String category;
 
   private Timestamp createTime;
 
@@ -50,11 +50,11 @@ public class Disease {
     return updateTime;
   }
 
-  public void setDepartmentId(Short departmentId) {
-    this.departmentId = departmentId;
+  public void setCategory(String category) {
+    this.category = category;
   }
 
-  public Short getDepartmentId() {
-    return departmentId;
+  public String getCategory() {
+    return category;
   }
 }
