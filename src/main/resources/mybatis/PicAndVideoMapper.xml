@@ -11,11 +11,11 @@
   </insert>
 
   <select id="selectByName" parameterType="String" resultType="base.model.PicAndVideoInfo">
-    select id ,type ,path from tb_picnvideo where path like #{name,jdbcType=VARCHAR}
+    select picnvideo_id as id ,type ,path from tb_picnvideo where path like #{name,jdbcType=VARCHAR}
   </select>
 
   <select id="selectAll" resultType="base.model.PicAndVideoInfo">
-    select id ,type ,path from tb_picnvideo
+    select picnvideo_id as id ,type ,path from tb_picnvideo
   </select>
 
 </mapper>

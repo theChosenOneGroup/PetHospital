@@ -32,7 +32,7 @@ public class PicAndVideoDaoImpl implements PicAndVideoDao {
   public List<PicAndVideoInfo> select(String name) {
     String stat = namespace + ".selectByName";
     try (SqlSession session = sqlSessionFactory.openSession()) {
-      List<PicAndVideoInfo> picAndVideoInfoList = session.selectList(stat, name);
+      List<PicAndVideoInfo> picAndVideoInfoList = session.selectList(stat, "%"+name+"%");
       session.commit();
       return picAndVideoInfoList;
     }
