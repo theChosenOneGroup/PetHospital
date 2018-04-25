@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pethospital.base.dao.CaseDao">
     <select id="select" parameterType="String" resultType="base.model.CaseInfo">
-         select case_id as caseId,case_name as caseName,case_type as caseType,jc_name as jcName,jc_pic as jcPic,
+         select case_id as caseId,case_name as caseName,case_type as caseType,diagnose_name as diagnoseName,diagnose_pic as diagnosePic,
         check_name as checkName,check_pic as checkPic,result as result,treat_text as treatText,treat_video as treatVideo,
         medicine_id as medicineId,labwork_id as labworkId,vaccine_id as vaccineId,stay_days as stayDays
         from tb_case where case_name like#{caseName}
@@ -12,8 +12,8 @@
 
     <insert id="insert" parameterType="base.model.CaseInfo" useGeneratedKeys="true"
             keyProperty="case_id">
-        insert into tb_case(case_name,case_type,jc_name,jc_pic,check_name,check_pic,result,treat_text,treat_video,medicine_id,labwork_id,vaccine_id,stay_days)
-        values(#{caseName},#{caseType},#{jcName},#{jcPic},#{checkName},#{checkPic},
+        insert into tb_case(case_name,case_type,diagnose_name,diagnose_pic,check_name,check_pic,result,treat_text,treat_video,medicine_id,labwork_id,vaccine_id,stay_days)
+        values(#{caseName},#{caseType},#{diagnoseName},#{diagnosePic},#{checkName},#{checkPic},
         #{result},#{treatText},#{treatVideo},#{medicineId},#{labworkId},#{vaccineId},#{stayDays})
     </insert>
 
@@ -22,13 +22,13 @@
     </delete>
 
     <update id="update" parameterType="base.model.CaseInfo">
-        update tb_case set case_name=#{caseName},case_type=#{caseType},jc_name=#{jcName},jc_pic=#{jcPic},
+        update tb_case set case_name=#{caseName},case_type=#{caseType},diagnose_name=#{diagnoseName},diagnose_pic=#{diagnosePic},
           check_name=#{checkName},check_pic=#{checkPic},result=#{result},treat_text=#{treatText},treat_video=#{treatVideo},
           medicine_id=#{medicineId},labwork_id=#{labworkId},vaccine_id=#{vaccineId},stay_days=#{stayDays} where case_name=#{caseName}
     </update>
 
     <select id="selectAll"  resultType="base.model.CaseInfo">
-        select case_id as caseId,case_name as caseName,case_type as caseType,jc_name as jcName,jc_pic as jcPic,
+        select case_id as caseId,case_name as caseName,case_type as caseType,diagnose_name as diagnoseName,diagnose_pic as diagnosePic,
         check_name as checkName,check_pic as checkPic,result as result,treat_text as treatText,treat_video as treatVideo,
         medicine_id as medicineId,labwork_id as labworkId,vaccine_id as vaccineId,stay_days as stayDays
         from tb_case
