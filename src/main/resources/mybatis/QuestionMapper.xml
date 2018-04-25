@@ -4,12 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pethospital.base.dao.QuestionDao">
     <select id="selectQuestion" parameterType="String" resultType="base.model.QuestionInfo">
-        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions where text like #{text}
+        select question_id as questionId,type as typeName,text as text,answer as answer from tb_questions where text like #{text}
     </select>
 
     <insert id="insertQuestion" parameterType="base.model.QuestionInfo" useGeneratedKeys="true"
             keyProperty="question_id">
-        insert into tb_questions(type_name, text, answer)
+        insert into tb_questions(name, text, answer)
         values(#{typeName,jdbcType=VARCHAR},
         #{text,jdbcType=VARCHAR},
         #{answer,jdbcType=VARCHAR}
@@ -25,13 +25,13 @@
     </update>
 
     <select id="selectAll"  resultType="base.model.QuestionInfo">
-        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions
+        select question_id as questionId,type as typeName,text as text,answer as answer from tb_questions
     </select>
     <select id="selectFromAll"  resultType="base.model.QuestionInfo">
-        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions order by rand() limit 20
+        select question_id as questionId,type as typeName,text as text,answer as answer from tb_questions order by rand() limit 20
     </select>
 
     <select id="selectByType"  parameterType="String" resultType="base.model.QuestionInfo">
-        select question_id as questionId,type_name as typeName,text as text,answer as answer from tb_questions where type_name=#{typeName} order by rand() limit 20
+        select question_id as questionId,type as typeName,text as text,answer as answer from tb_questions where type=#{typeName} order by rand() limit 20
     </select>
 </mapper>

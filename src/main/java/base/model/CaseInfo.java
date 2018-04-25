@@ -4,8 +4,8 @@ public class CaseInfo {
     int caseId;
     String caseName;
     String caseType;
-    String jcName;
-    String jcPic;
+    String diagnoseName;
+    String diagnosePic;
     String checkName;
     String checkPic;
     String result;
@@ -40,20 +40,20 @@ public class CaseInfo {
         return caseType;
     }
 
-    public String getJcName() {
-        return jcName;
+    public String getDiagnoseName() {
+        return diagnoseName;
     }
 
-    public void setJcName(String jcName) {
-        this.jcName = jcName;
+    public void setDiagnoseName(String diagnoseName) {
+        this.diagnoseName = diagnoseName;
     }
 
-    public String getJcPic() {
-        return jcPic;
+    public String getDiagnosePic() {
+        return diagnosePic;
     }
 
-    public void setJcPic(String jcPic) {
-        this.jcPic = jcPic;
+    public void setDiagnosePic(String diagnosePic) {
+        this.diagnosePic = diagnosePic;
     }
 
     public int getStayDays() {

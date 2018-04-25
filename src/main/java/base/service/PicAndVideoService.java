@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface PicAndVideoService {
 
-  public int saveVideo(PicAndVideoInfo picAndVideoInfo);
+  public  int saveVideo(PicAndVideoInfo picAndVideoInfo);
 
-  public int savePicture(PicAndVideoInfo picAndVideoInfo);
+  public  int savePicture(PicAndVideoInfo picAndVideoInfo);
 
   public List<PicAndVideoInfo> select(String name);
 
