@@ -22,7 +22,7 @@ public class VaccineManageController {
     private ResponsePacker responsePacker = new ResponsePacker();
 
     @Autowired
-    public void setUserManageService(VaccineManageService vaccineManageService) {
+    public void setVaccineManageService(VaccineManageService vaccineManageService) {
         this.vaccineManageService = vaccineManageService;
     }
 

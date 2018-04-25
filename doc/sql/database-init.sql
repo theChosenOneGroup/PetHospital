@@ -7,7 +7,7 @@ CREATE TABLE `tb_user` (
   `authority` varchar(255) DEFAULT NULL,
   `label_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_paper` (
@@ -18,7 +18,7 @@ CREATE TABLE `tb_paper` (
   `end_date` date DEFAULT NULL,
   `duration` date DEFAULT NULL,
   PRIMARY KEY (`paper_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_questions` (
@@ -27,7 +27,7 @@ CREATE TABLE `tb_questions` (
   `text` text,
   `answer` text,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_vaccine` (
@@ -35,7 +35,7 @@ CREATE TABLE `tb_vaccine` (
   `vaccine_name` varchar(20) DEFAULT NULL,
   `cost` decimal(38,5) NOT NULL,
   PRIMARY KEY (`vaccine_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_labwork` (
@@ -43,7 +43,7 @@ CREATE TABLE `tb_labwork` (
   `labwork_name` varchar(20) DEFAULT NULL,
   `cost` decimal(38,5) NOT NULL,
   PRIMARY KEY (`labwork_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_medicine` (
@@ -51,7 +51,7 @@ CREATE TABLE `tb_medicine` (
   `name` varchar(20) DEFAULT NULL,
   `cost` decimal(38,5) NOT NULL,
   PRIMARY KEY (`medicine_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_picnvideo` (
@@ -59,7 +59,7 @@ CREATE TABLE `tb_picnvideo` (
   `type` int(10) DEFAULT NULL,
   `path` text,
   PRIMARY KEY (`picnvideo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_office` (
@@ -67,7 +67,7 @@ CREATE TABLE `tb_office` (
   `person_name` varchar(20) DEFAULT NULL,
   `office_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`office_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `tb_case` (
@@ -75,9 +75,9 @@ CREATE TABLE `tb_case` (
   `case_name` varchar(20) DEFAULT NULL,
   `case_type` varchar(20) DEFAULT NULL,
   `check_name` varchar(20) DEFAULT NULL,
-  `check_pic_id` int(10),
+  `check_pic` varchar(20),
   `diagnose_name` varchar(20) DEFAULT NULL,
-  `diagnose_pic_id` int(10),
+  `diagnose_pic` varchar(20),
   `result` varchar(20) DEFAULT NULL,
   `treat_text` text,
   `treat_video` varchar(20) DEFAULT NULL,
@@ -89,4 +89,4 @@ CREATE TABLE `tb_case` (
   CONSTRAINT `labwork_id` FOREIGN KEY (`labwork_id`) REFERENCES `tb_labwork` (`labwork_id`),
   CONSTRAINT `medicine_id` FOREIGN KEY (`medicine_id`) REFERENCES `tb_medicine` (`medicine_id`),
   CONSTRAINT `vaccine_id` FOREIGN KEY (`vaccine_id`) REFERENCES `tb_vaccine` (`vaccine_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

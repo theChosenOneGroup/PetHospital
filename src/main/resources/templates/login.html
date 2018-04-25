@@ -1,21 +1,449 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-    <h2>Customized Login Page</h2>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            src: url('//at.alicdn.com/t/font_1463147324_946932.eot');
+            /* IE9*/
+            src: url('//at.alicdn.com/t/font_1463147324_946932.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('http://at.alicdn.com/t/font_1463147324_946932.woff') format('woff'), /* chromeã€firefox */
+            url('http://at.alicdn.com/t/font_1463147324_946932.ttf') format('truetype'), /* chromeã€firefoxã€operaã€Safari, Android, iOS 4.2+*/
+            url('//at.alicdn.com/t/font_1463147324_946932.svg#iconfont') format('svg');
+            /* iOS 4.1- */
+        }
+
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        li {
+            list-style: none;
+        }
+
+        form a {
+            text-decoration: none;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+        }
+
+        .wrapper {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .header {
+            font-size: 25px;
+            font-family: å¾®è½¯é›…é»‘;
+            color: rgb(98, 94, 91);
+        }
+
+        .header span {
+            font-size: 30px;
+            font-family: "Brush Script Std";
+        }
+
+        form {
+            background: url(input-bg.png);
+            width: 260px;
+            height: 260px;
+            margin: 35px auto;
+            padding: 30px;
+            box-shadow: 0px 1px 2px 1px #aaaaaa,
+            inset 0px 1px 1px rgba(255, 255, 255, 0.7);
+            border-radius: 3px;
+        }
+
+        form ul {
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+        }
+
+        ul li div {
+            width: 260px;
+            height: 40px;
+            background: #e1dcd8;
+            color: rgb(98, 94, 91);
+            box-shadow: inset 0px 2px 5px #aaaaaa;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        ul li .yonghu {
+            font-family: iconfont;
+            position: absolute;
+            top: 12px;
+            left: 10px;
+        }
+
+        ul li .mima {
+            font-family: iconfont;
+            position: absolute;
+            top: 12px;
+            left: 10px;
+        }
+
+        ul li div input {
+            height: 40px;
+            width: 190px;
+            padding: 0 35px;
+            border: none;
+            background: #e1dcd8;
+            color: rgb(98, 94, 91);
+            box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7),
+            inset 0px 2px 5px #aaaaaa;
+            border-radius: 5px;
+        }
+
+        ul li input:focus {
+            outline: none;
+            background: #f5f2ef;
+        }
+
+        ul .remember {
+            font-size: 14px;
+            font-family: å¾®è½¯é›…é»‘;
+            font-weight: bold;
+            color: rgb(98, 94, 91);
+            position: relative;
+        }
+
+        ul .remember input[type*="checkbox"] {
+            width: 20px;
+            height: 20px;
+            vertical-align: super;
+            margin-right: 12px;
+            visibility: hidden;
+        }
+
+        .remember label {
+            cursor: pointer;
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: 7px;
+            left: 0;
+            background: #eee;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+
+        /*Display the tick inside the checkbox*/
+
+        .remember label:after {
+            opacity: 0.4;
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 5px;
+            background: transparent;
+            top: 6px;
+            left: 4px;
+            border: 3px solid #74884a;
+            border-top: none;
+            border-right: none;
+
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        /*Create the hover event of the tick*/
+
+        .remember label:hover::after {
+            opacity: 0.7;
+        }
+
+        /*Create the checkbox state for the tick*/
+
+        .remember input[type=checkbox]:checked+label:after {
+            opacity: 1;
+            border-color: #74884a;
+        }
+
+        ul li a {
+            font-size: 14px;
+            font-family: é»‘ä½“;
+            color: rgb(152, 142, 135);
+        }
+
+        ul li input[type*="submit"] {
+            width: 100%;
+            height: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            background: -moz-linear-gradient( top,
+            #94aa64 0%,
+            #7a924a 50%,
+            #607738);
+            background: -webkit-gradient( linear, left top, left bottom,
+            from(#94aa64),
+            color-stop(0.50, #7a924a),
+            to(#607738));
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            border: 1px solid #7d8862;
+            -moz-box-shadow: 0px 1px 0px rgba(170, 170, 170, 1),
+            inset 0px 1px 1px rgba(255, 255, 255, 0.7);
+            -webkit-box-shadow: 0px 1px 0px rgba(170, 170, 170, 1),
+            inset 0px 1px 1px rgba(255, 255, 255, 0.7);
+            box-shadow: 0px 1px 0px rgba(170, 170, 170, 1),
+            inset 0px 1px 1px rgba(255, 255, 255, 0.7);
+            text-shadow: 0px -1px 0px rgba(000, 000, 000, 0.3),
+            0px 0px 0px rgba(255, 255, 255, 0);
+        }
+
+        ul li input[type*="submit"]:hover {
+            opacity: 0.8;
+        }
+
+        ul li input[type*="submit"]:active {
+            width: 100%;
+            height: 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            color: #ffffff;
+            background: -moz-linear-gradient( top,
+            #607738 0%,
+            #7a924a 50%,
+            #94aa64);
+            background: -webkit-gradient( linear, left top, left bottom,
+            from(#607738),
+            color-stop(0.50, #7a924a),
+            to(#94aa64));
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            border: 1px solid #7d8862;
+            -moz-box-shadow: 0px -1px 0px rgba(170, 170, 170, 1),
+            inset 0px -1px 1px rgba(255, 255, 255, 0.7);
+            -webkit-box-shadow: 0px -1px 0px rgba(170, 170, 170, 1),
+            inset 0px -1px 1px rgba(255, 255, 255, 0.7);
+            box-shadow: 0px -1px 0px rgba(170, 170, 170, 1),
+            inset 0px -1px 1px rgba(255, 255, 255, 0.7);
+            text-shadow: 0px 1px 0px rgba(000, 000, 000, 0.3),
+            0px 0px 0px rgba(255, 255, 255, 0);
+        }
+
+        .footer {
+            font-size: 16px;
+            font-family: é»‘ä½“;
+            color: rgb(255, 99, 71);
+        }
+
+        .footer a {
+            color: rgb(152, 142, 135);
+        }
+
+        #cas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            background-color: #7CCD7C;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cas"></canvas>
+
+    <script>
+        !function () {
+            var canvas = document.getElementById('cas');
+            var ctx = canvas.getContext('2d');
+            var rgb = '255';      // 线条颜色值
+            var extendDis = 5;   // 可超出的画布边界
+            var lineDis = 150;    // 连线距离
+            lineDis *= lineDis;
+            resize();
+            window.onresize = resize;
+            function resize() {
+                canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            }
+            var RAF = (function () {
+                return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
+            })();
+            // 鼠标活动时，获取鼠标坐标
+            var warea = { x: null, y: null };
+            window.onmousemove = function (e) {
+                e = e || window.event;
+                warea.x = e.clientX - canvas.offsetLeft;
+                warea.y = e.clientY - canvas.offsetTop;
+            };
+            window.onmouseout = function (e) {
+                warea.x = null;
+                warea.y = null;
+            };
+            window.onclick = function (e) {
+                warea.x = e.clientX - canvas.offsetLeft;
+                warea.y = e.clientY - canvas.offsetTop;
+                var x = warea.x;
+                var y = warea.y;
+                var xa = (Math.random() * 2 - 1) / 1.5;
+                var ya = (Math.random() * 2 - 1) / 1.5;
+                var r = Math.random() * 2;
+                dots.push({
+                    x: x,
+                    y: y,
+                    xa: xa,
+                    ya: ya,
+                    r: r,
+                })
+            }
+            // 添加粒子
+            // x，y为粒子坐标，xa, ya为粒子xy轴加速度，max为连线的最大距离
+            var dots = [];
+            for (var i = 0; i < 150; i++) {
+                var x = Math.random() * (canvas.width + 2 * extendDis) - extendDis;
+                var y = Math.random() * (canvas.height + 2 * extendDis) - extendDis;
+                var xa = (Math.random() * 2 - 1) / 1.5;
+                var ya = (Math.random() * 2 - 1) / 1.5;
+                var r = Math.random() * 2;
+                dots.push({
+                    x: x,
+                    y: y,
+                    xa: xa,
+                    ya: ya,
+                    r: r,
+                })
+            }
+            // 延迟100秒开始执行动画，如果立即执行有时位置计算会出错
+            setTimeout(function () {
+                animate();
+            }, 100);
+            // 每一帧循环的逻辑
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                bubDrawLine([warea].concat(dots));
+                RAF(animate);
+            }
+            /**
+             * 逐个对比连线
+             * @param ndots
+             */
+            function bubDrawLine(ndots) {
+                var ndot;
+                dots.forEach(function (dot) {
+                    move(dot);
+                    // 循环比对粒子间的距离
+                    for (var i = 0; i < ndots.length; i++) {
+                        ndot = ndots[i];
+                        if (dot === ndot || ndot.x === null || ndot.y === null) continue;
+                        var xc = dot.x - ndot.x;
+                        var yc = dot.y - ndot.y;
+                        // 如果x轴距离或y轴距离大于max,则不计算粒子距离
+                        if (xc > ndot.max || yc > lineDis) continue;
+                        // 两个粒子之间的距离
+                        var dis = xc * xc + yc * yc;
+                        // 如果粒子距离超过max,则不做处理
+                        if (dis > lineDis) continue;
+                        // 距离比
+                        var ratio;
+                        // 如果是鼠标，则让粒子向鼠标的位置移动
+                        if (ndot === warea && dis < 20000) {
+                            dot.x -= xc * 0.01;
+                            dot.y -= yc * 0.01;
+                        }
+                        // 计算距离比
+                        ratio = (lineDis - dis) / lineDis;
+                        // 粒子间连线
+                        ctx.beginPath();
+                        ctx.lineWidth = ratio / 1.5;
+                        ctx.strokeStyle = 'rgba(' + rgb + ', ' + rgb + ', ' + rgb + ', 1';
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(ndot.x, ndot.y);
+                        ctx.stroke();
+                    }
+                    // 将已经计算过的粒子从数组中删除
+                    ndots.splice(ndots.indexOf(dot), 1);
+                });
+            }
+            /**
+             * 粒子移动
+             * @param dot
+             */
+            function move(dot) {
+                dot.x += dot.xa;
+                dot.y += dot.ya;
+                // 遇到边界将加速度反向
+                dot.xa *= (dot.x > (canvas.width + extendDis) || dot.x < -extendDis) ? -1 : 1;
+                dot.ya *= (dot.y > (canvas.height + extendDis) || dot.y < -extendDis) ? -1 : 1;
+                // 绘制点
+                ctx.fillStyle = 'rgba(' + rgb + ', ' + rgb + ', ' + rgb + ', 1';
+                ctx.beginPath();
+                ctx.arc(dot.x - 0.5, dot.y - 0.5, dot.r, 0, 2 * Math.PI);
+                ctx.fill();
+                //ctx.fillRect(dot.x - 0.5, dot.y - 0.5, 1, 1);
+            }
+        }();
+    </script>
+
+    <div class="wrapper">
+        <div class="header">Login to
+            <span>PetHospital</span>
         </div>
         <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
+            <ul>
+                <li>
+                    <div class="text">
+                        <span class="yonghu"></span>
+                        <input type="text" placeholder="username">
+                    </div>
+                </li>
+                <li>
+                    <div class="password">
+                        <span class="mima"></span>
+                        <input type="password" placeholder="password">
+                    </div>
+                </li>
+                <li class="remember">
+                    <input id="checkbox" type="checkbox">
+                    <label for="checkbox"></label>Remember Me
+                </li>
+                <li>
+                    <a href="">Forgot username or password?</a>
+                </li>
+                <li>
+                    <input type="Submit" value="Login">
+                </li>
+            </ul>
         </form>
-    </body>
+        <div class="footer" th:if="${param.error}">
+            用户名或密码错误
+        </div>
+        <div class="footer" th:if="${param.logout}">
+            您已注销成功
+        </div>
+    </div>
+
+</body>
+
 </html>

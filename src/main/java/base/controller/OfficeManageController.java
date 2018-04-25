@@ -22,7 +22,7 @@ public class OfficeManageController {
     private ResponsePacker responsePacker = new ResponsePacker();
 
     @Autowired
-    public void setUserManageService(OfficeManageService officeManageService) {
+    public void setOfficeManageService(OfficeManageService officeManageService) {
         this.officeManageService = officeManageService;
     }
 
