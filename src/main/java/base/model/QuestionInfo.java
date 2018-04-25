@@ -6,7 +6,6 @@ public class QuestionInfo {
     String typeName;
     String text;
     String answer;
-
     public void setQuestionId(int questionId){
         this.questionId=questionId;
     }

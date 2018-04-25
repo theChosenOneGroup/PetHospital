@@ -34,6 +34,10 @@ public class ExamInfo {
     {
         return labelType;
     }
+    public String getQuestionId()
+    {
+        return questionId;
+    }
     public Date getStartDate()
     {
         return startDate;

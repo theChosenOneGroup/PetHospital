@@ -1,7 +1,9 @@
 package base.service.impl;
 
 import base.dao.ExamDao;
+import base.dao.QuestionDao;
 import base.model.ExamInfo;
+import base.model.QuestionInfo;
 import base.service.ExamManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,7 @@ import java.util.List;
 public class ExamManageServiceImpl implements ExamManageService {
     @Autowired
     private ExamDao examDao;
-
+    private QuestionDao questionDao;
     public int delete(ExamInfo examInfo) {
         int result = examDao.delete(examInfo);
         return result;
@@ -20,6 +22,10 @@ public class ExamManageServiceImpl implements ExamManageService {
 
     public int update(ExamInfo examInfo) {
         int result = examDao.update(examInfo);
+        return result;
+    }
+    public int addExam(ExamInfo examInfo) {
+        int result = examDao.addExam(examInfo);
         return result;
     }
 }

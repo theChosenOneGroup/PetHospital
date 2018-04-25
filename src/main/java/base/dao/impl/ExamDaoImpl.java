@@ -1,6 +1,7 @@
 package base.dao.impl;
 import base.dao.ExamDao;
 import base.model.ExamInfo;
+import base.model.QuestionInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public class ExamDaoImpl implements  ExamDao{
             return num;
         }
     }
-
+    public int addExam(ExamInfo examInfo){
+        String stat = namespace + ".insertExam";
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            int num = session.insert(stat, examInfo);
+            session.commit();
+            return num;
+        }
+    }
 }
 
