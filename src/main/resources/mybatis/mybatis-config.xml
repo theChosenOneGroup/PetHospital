@@ -30,5 +30,6 @@
     <mapper resource="mybatis/QuestionMapper.xml"/>
     <mapper resource="mybatis/OfficeMapper.xml"/>
     <mapper resource="mybatis/AdminMapper.xml"/>
+    <mapper resource="mybatis/ExamMapper.xml"/>
   </mappers>
 </configuration>

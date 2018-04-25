@@ -5,6 +5,7 @@
 <mapper namespace="com.pethospital.base.dao.LabworkDao">
     <select id="selectLabwork" parameterType="String" resultType="base.model.LabworkInfo">
         select labwork_id as labworkId,labwork_name as labworkName,cost as cost from tb_labwork where labwork_name like #{labworkName}
+        select vaccine_id as vaccineId,vaccine_name as vaccineName,cost as cost from tb_vaccine where vaccine_name like #{vaccineName}
     </select>
 
     <insert id="insertLabwork" parameterType="base.model.LabworkInfo" useGeneratedKeys="true"
