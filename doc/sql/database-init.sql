@@ -13,10 +13,10 @@ CREATE TABLE `tb_user` (
 CREATE TABLE `tb_paper` (
   `paper_id` int(10) auto_increment NOT NULL,
   `label_type` varchar(20) DEFAULT NULL,
-  `question_id` int(10) NOT NULL,
+  `question_id` varchar(100) NOT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `duration` date DEFAULT NULL,
+  `duration` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`paper_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
