@@ -11,6 +11,7 @@
     <update id="update" parameterType="base.model.ExamInfo">
         update tb_paper set duration= #{duration} where label_type= #{labelType}
     </update>
+
     <insert id="insertExam" parameterType="base.model.ExamInfo" useGeneratedKeys="true"
             keyProperty="exam_id">
         insert into tb_paper(label_type, question_id,start_date,end_date,duration)
@@ -21,4 +22,8 @@
         #{duration,jdbcType=VARCHAR}
         );
     </insert>
+    <select id="selectExam" parameterType="String" resultType="base.model.ExamInfo">
+        select paper_id as paperId,label_type as labelType,question_id as questionId,start_date as startDate,
+        end_date as endDate,duration as duration from tb_paper where label_type = #{labelType}
+    </select>
 </mapper>

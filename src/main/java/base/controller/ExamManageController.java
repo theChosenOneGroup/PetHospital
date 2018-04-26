@@ -57,6 +57,18 @@ public class ExamManageController {
         };
         return responsePacker.pack(null, dataRequest);
     }
+    @RequestMapping(value = "/exam/search", method = RequestMethod.POST)
+    public ResponseWrapper searchExam(@RequestBody ExamInfo examInfo){
+        DataRequest dataRequest = new DataRequest() {
+            @Override
+            public List<?> execute(Map<String, Object> params) {
+                List result = new ArrayList<ExamInfo>();
+                result=examManageService.searchExam(examInfo);
+                return result;
+            }
+        };
+        return responsePacker.pack(null, dataRequest);
+    }
     @RequestMapping(value = "/exam/add", method = RequestMethod.POST)
     public ResponseWrapper addExam(@RequestBody ExamInfo examInfo) {
         DataRequest dataRequest = new DataRequest() {

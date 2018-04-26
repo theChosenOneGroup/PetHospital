@@ -28,5 +28,10 @@ public class ExamManageServiceImpl implements ExamManageService {
         int result = examDao.addExam(examInfo);
         return result;
     }
+    public List<ExamInfo> searchExam(ExamInfo examInfo)
+    {
+        List<ExamInfo> examList= examDao.searchExam(examInfo.getLabelType());
+        return examList;
+    }
 }
 

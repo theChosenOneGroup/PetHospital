@@ -8,7 +8,12 @@ import java.util.List;
 
 public interface ExamDao {
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory);
+
     public int delete(ExamInfo examInfo);
+
     public int update(ExamInfo examInfo);
+
     public int addExam(ExamInfo examInfo);
+
+    List<ExamInfo> searchExam(String labelType);
 }

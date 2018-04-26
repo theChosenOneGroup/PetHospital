@@ -11,4 +11,6 @@ public interface ExamManageService {
     public int update(ExamInfo examInfo);
 
     public int addExam(ExamInfo examInfo);
+
+    public List<ExamInfo> searchExam(ExamInfo examInfo);
 }

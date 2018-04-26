@@ -41,6 +41,16 @@ public class ExamDaoImpl implements  ExamDao{
             session.commit();
             return num;
         }
+
+    }
+    public List<ExamInfo> searchExam(String labelType) {
+        String stat = namespace + ".selectExam";
+        try (SqlSession session = sqlSessionFactory.openSession()) {
+            String nameKey = "%" + labelType.trim() + "%";
+            List<ExamInfo> result = session.selectList(stat, nameKey);
+            session.commit();
+            return result;
+        }
     }
 }
 
