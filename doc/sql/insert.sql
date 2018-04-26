@@ -63,14 +63,14 @@ INSERT INTO `pethospital`.`tb_user` (`user_id`, `user_name`, `password`, `author
 INSERT INTO `pethospital`.`tb_user` (`user_id`, `user_name`, `password`, `authority`, `label_type`) VALUES ('10', 'iop654321', '123456', '0', '中级班');
 
 
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('1', '医生1', '挂号处');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('2', '医生2', '内科诊室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('3', '医生3', '外科诊室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('4', '医生4', '中兽医诊室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('5', '医生5', '化验室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('6', '医生6', '病理诊断室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('7', '医生7', '微生物诊断室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('8', '医生8', 'B超室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('9', '医生9', 'X-光室');
-INSERT INTO `pethospital`.`tb_office` (`office_id`, `persion_name`, `office_name`) VALUES ('10', '医生10', '药房');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('1', '医生1', '挂号处');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('2', '医生2', '内科诊室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('3', '医生3', '外科诊室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('4', '医生4', '中兽医诊室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('5', '医生5', '化验室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('6', '医生6', '病理诊断室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('7', '医生7', '微生物诊断室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('8', '医生8', 'B超室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('9', '医生9', 'X-光室');
+INSERT INTO `pethospital`.`tb_office` (`office_id`, `person_name`, `office_name`) VALUES ('10', '医生10', '药房');
 
